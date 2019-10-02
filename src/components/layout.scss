@@ -1,0 +1,31 @@
+@import '../_colors';
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,400i,700,700i|Ubuntu:400,400i,700,700i&display=swap');
+
+html {
+  color: $light-fg;
+  background-color: $light-bg;
+  font-family: 'Ubuntu', sans-serif;
+  line-height: normal;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.page-container {
+    font-size: 1rem;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}

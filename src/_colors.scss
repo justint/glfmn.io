@@ -1,0 +1,90 @@
+/// Colors come from the Gruvbox theme
+
+/// Shared base color palette
+
+$black: #282828;
+$white: #FBF1C7;
+$red: #CC241D;
+$green: #98971A;
+$yellow: #D79921;
+$blue: #458588;
+$purple: #B16286;
+$aqua: #689D6A;
+$orange: #D65D0E;
+$gray: #928374;
+
+/// Dark mode colors
+
+/// Background (black and gray) colors
+$dark-bg0_s: #32302F;
+$dark-bg0_h: #1D2021;
+$dark-bg0: $black;
+$dark-bg1: #3C3836;
+$dark-bg2: #504945;
+$dark-bg3: #665C54;
+$dark-bg4: #7C6F64;
+$dark-bg: $dark-bg0;
+
+/// Foreground (white and light gray) colors
+$dark-fg0: $white;
+$dark-fg1: #EBDBB2;
+$dark-fg2: #D5C4A1;
+$dark-fg3: #DBAE93;
+$dark-fg4: #A89984;
+$dark-fg: $dark-fg1;
+
+/// Primary and Secondary colors
+$dark-red: $red;
+$dark-bright-red: #FB4934;
+$dark-green: $green;
+$dark-bright-green: #B8BB26;
+$dark-yellow: $yellow;
+$dark-bright-yellow: #FABD2F;
+$dark-blue: $blue;
+$dark-bright-blue: #83A598;
+$dark-purple: $purple;
+$dark-bright-purple: #D3868B;
+$dark-aqua: $aqua;
+$dark-bright-aqua: #8EC07C;
+$dark-orange: $orange;
+$dark-bright-orange: #FE8019;
+$dark-gray: $gray;
+$dark-bright-gray: #928374;
+
+/// Light mode colors
+
+/// Background (white and light gray) colors
+$light-bg0_s: #F2E5BC;
+$light-bg0_h: #F9F5D7;
+$light-bg0: $white;
+$light-bg1: $dark-fg1;
+$light-bg2: $dark-fg2;
+$light-bg3: $dark-fg3;
+$light-bg4: $dark-fg4;
+$light-bg: $light-bg0;
+
+/// Foreground (black and gray) colors
+$light-fg0: $black;
+$light-fg1: $dark-bg1;
+$light-fg2: $dark-bg2;
+$light-fg3: $dark-bg3;
+$light-fg4: $dark-bg4;
+$light-fg: $light-fg1;
+
+/// Primary and Secondary colors
+$light-red: $red;
+$light-bright-red: #9D0006;
+$light-green: $green;
+$light-bright-green: #79740E;
+$light-yellow: $yellow;
+$light-bright-yellow: #B57614;
+$light-blue: $blue;
+$light-bright-blue: #076678;
+$light-purple: $purple;
+$light-bright-purple: #8F3F71;
+$light-aqua: $aqua;
+$light-bright-aqua: #427B58;
+$light-gray: #7C6F64;
+$light-bright-gray: $gray;
+$light-orange: $orange;
+$light-bright-orange: #AF3A03;
