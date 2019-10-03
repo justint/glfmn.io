@@ -3,7 +3,8 @@
 
 .container {
     display: flex;
-    direction: row;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     font-size: 1rem;
     padding: 1em 3em;
@@ -16,6 +17,10 @@
         right: 0;
         bottom: 0;
         position: sticky;
+    }
+
+    @media only screen and (max-width: $mobile-size) {
+        font-size: 0.8rem;
     }
 }
 

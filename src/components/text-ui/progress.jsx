@@ -1,23 +1,27 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import style from './text-ui.module.scss'
+import { useWidth } from '../../hooks'
 
-export function Progress(props) {
+export function Progress({ label, width, progress }) {
     const left = '╢'
     const right = '╟'
     const filler = '░'
     const full = '▒'
 
-    const labelSize = props.label? props.label.length + 1 : 0
+    const leftEl = useRef(null)
+    const columnWidth = useWidth(leftEl)
 
-    const { columns, progress } = props
-    const width = columns - labelSize - 2;
-    const finished = Math.floor(Math.max(0, Math.min(width, progress * width)))
+    const columns = Math.floor((width - columnWidth)/Math.max(columnWidth, 1));
+
+    const labelSize = label? label.length + 1 : 0
+    const barWidth = Math.max(columns - labelSize - 2, 5);
+    const finished = Math.floor(Math.max(0, Math.min(barWidth, progress * barWidth)))
     return (
         <div className={style.uiContainer}>
-            { props.label && <span className={style.label}>{props.label + ' '}</span> }
-            <span className={style.uiDecorative}>{left}</span>
+            { label && labelSize < columns-5 && <span className={style.label}>{label + ' '}</span> }
+            <span ref={leftEl} className={style.uiDecorative}>{left}</span>
             <span>{full.repeat(finished)}</span>
-            <span className={style.uiDecorative}>{filler.repeat(width - finished)}</span>
+            <span className={style.uiDecorative}>{filler.repeat(barWidth - finished)}</span>
             <span className={style.uiDecorative}>{right}</span>
         </div>
     )

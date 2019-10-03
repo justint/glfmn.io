@@ -10,8 +10,10 @@ export default function Footer({ children }) {
                     return (<li className={style.link} key={key}>{link}</li>)
                 })}
             </ul></nav>
-            <p class={style.contact}>Email <b>me@glfmn.io</b></p>
-            <p class={style.copyright}>© {new Date().getFullYear()}</p>
+            <span>
+                <p className={style.contact}>Email <b>me@glfmn.io</b></p>
+                <p className={style.copyright}>© {new Date().getFullYear()}</p>
+            </span>
         </footer>
     )
 }
