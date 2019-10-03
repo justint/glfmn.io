@@ -1,13 +1,22 @@
 @import '../_colors';
-@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,400i,700,700i|Ubuntu:400,400i,700,700i&display=swap');
+@import '../_constants';
+@import url('https://fonts.googleapis.com/css?Ubuntu:400,400i,700,700i&display=swap');
 
 html {
   color: $light-fg;
   background-color: $light-bg;
   font-family: 'Ubuntu', sans-serif;
+  text-size-adjust: 100%;
+
+  font-size: 14px;
+
+  @media (min-width: $large-size) {
+      & { font-size: 15px; }
+  }
+  @media (max-width: $mobile-size) {
+      & { font-size: 12.25px; }
+  }
   line-height: normal;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {

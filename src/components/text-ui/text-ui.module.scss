@@ -1,0 +1,18 @@
+@import '../../colors';
+
+.label {
+    color: $dark-blue;
+}
+
+.ui-container {
+    margin: 0;
+    user-select: none;
+}
+
+.ui-interactive {
+    cursor: pointer;
+}
+
+.ui-decorative {
+    color: $dark-gray;
+}

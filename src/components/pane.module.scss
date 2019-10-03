@@ -1,0 +1,240 @@
+@import '../colors';
+@import '../constants';
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:400,400i,700&display=swap');
+
+$box-color: $dark-bg2;
+$box-border: 1px solid $box-color;
+$link-color: $dark-yellow;
+$text-element-color: $dark-gray;
+
+.inner {
+    background-color: $dark-bg;
+}
+
+.pane-container {
+    font-size: 1rem;
+    font-family: 'Source Code Pro', monospace;
+    color: $dark-fg0;
+    background-color: $dark-bg1;
+
+    *::selection {
+        color: $light-fg0;
+        background-color: $light-bg2;
+    }
+
+    box-sizing: border-box;
+    margin: 1em 2em;
+    @media only screen and (max-width: $mobile-size) {
+        margin: 1em 0;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-top: 1em;
+        font-size: 1em;
+        line-height: normal;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    h3, h3::selection {
+        color: $dark-purple;
+    }
+
+    h4, h5, h6 {
+        font-weight: normal;
+        color: $dark-blue;
+
+        &::selection {
+            color: $dark-blue;
+        }
+    }
+
+    h3::before {
+        content: '# ';
+    }
+
+    h4::before {
+        content: '## ';
+    }
+
+    h5::before {
+        content: '### ';
+    }
+
+    h6::before {
+        content: '#### ';
+    }
+
+    p {
+        margin: 0;
+    }
+
+    a {
+        &::selection {
+            color: $light-yellow;
+            background-color: $light-bg1;
+        }
+
+        color: $link-color;
+        cursor: pointer;
+        border-bottom: 1px dashed;
+        text-decoration: none;
+
+        &:hover {
+            background-color: $link-color;
+            color: $dark-bg0;
+            border-bottom: none;
+        }
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        display: block;
+        margin: 0;
+
+        li::before {
+            color: $text-element-color;
+            display: inline-block;
+            width: 2em;
+            margin-right: 1em;
+            content: '*';
+            text-align: right;
+        }
+    }
+}
+
+.path {
+    color: $dark-bright-aqua;
+    font-weight: 700;
+    font-size: 1rem;
+    font-family: 'Source Code Pro', monospace;
+    margin: 0;
+    padding: 0;
+}
+
+.box-container {
+    text-align: center;
+}
+
+.box {
+    display: inline-block;
+    margin: 4em auto;
+    background-color: $dark-bg0;
+    border: $box-border;
+    text-align: left;
+}
+
+.title-container {
+    min-width: 33%;
+    max-width: 66%;
+    max-width: minmax(66%, 20em);
+    padding: 2em;
+}
+
+.title {
+    font-weight: 700;
+
+    &::before {
+        content: 'title: ';
+        color: $dark-bright-green;
+    }
+}
+
+.author {
+    font-weight: 400;
+
+    &::before {
+        content: 'author: ';
+        color: $dark-blue;
+    }
+}
+
+.date {
+    margin: 0;
+
+    &::before {
+        content: 'date: ';
+        color: $dark-yellow;
+    }
+}
+
+.excerpt {
+    margin-bottom: 0;
+    margin-top: 1em;
+}
+
+$column-size: 1em;
+$column-size-2: 2em;
+$gutter-size: 4em;
+$gutter-offset: 5em;
+
+/// Line numbers (::after content) are absolutely positioned off the left edge
+/// of the text area which depends on the size of the gutter; add the padding
+/// of one column between the gutter and the text and the offset is 5ems.  This
+/// is to allow elements that need the ::before content to still have content
+/// appear directly before the element and still count towards the line count.
+
+.line-numbered {
+    display: block;
+    margin: 0;
+    padding-left: $gutter-size;
+    padding-right: $column-size;
+    position: relative;
+}
+
+.textArea {
+    border-left: $box-border;
+    padding: $column-size-2 0;
+    padding-left: $column-size;
+
+    counter-reset: line-numbers;
+
+    a::before {
+        content: '~';
+        position: absolute;
+        left: -$column-size-2;
+        font-weight: bold;
+    }
+    a:hover::before {
+        color: $link-color;
+    }
+
+    /// Absolute position relative to the item itself, therefore each
+    /// item must be a block
+    p, li, code, pre, h1, h2, h3, h4, h5, h6 {
+        position: relative;
+        display: block;
+        &::after {
+            counter-increment: line-numbers;
+            content: counter(line-numbers);
+
+            color: $text-element-color;
+            font-weight: normal;
+            display: inline-block;
+
+            position: absolute;
+            top: 0;
+            left: -$gutter-offset;
+
+            width: 3em;
+            padding-right: $column-size;
+            text-align: right;
+        }
+    }
+
+    p::before {
+        color: $box-color;
+        content: '····';
+    }
+}
+
+.line-heading {
+    padding-left: $column-size;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-bottom: $box-border;
+    border-left: $box-border;
+}

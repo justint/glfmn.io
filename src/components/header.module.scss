@@ -1,0 +1,17 @@
+@import '../colors';
+
+.title {
+    font-family: 'Ubuntu', 'Ubuntu Mono' sans-serif;
+    font-size: 2em;
+    font-weight: 300;
+    background-color: $light-bg2;
+
+    a {
+        text-decoration: none;
+        color: inherit;
+
+        &:hover {
+            color: $light-fg3;
+        }
+    }
+}
