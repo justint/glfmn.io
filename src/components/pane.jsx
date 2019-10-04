@@ -89,9 +89,9 @@ export function PushD({ className, max, current, children, ...props }) {
     const linkName = link =>  link === '/'? '/home/glfmn' : `${link}.md`
 
     return (<nav {...props} className={classNames(style.pushd, className)}>
-        { current && <span className={style.pushdCurrent}>~{linkName(current)}</span> }
-        {links? links.links.slice(0, max || 5).map(link =>
-            <Link onClick={() => links.popD(link)} key={link} tabIndex='0' to={link}>{linkName(link)}</Link>
-        ) : home }
+      { current && <span className={style.pushdCurrent}>~{linkName(current)}</span> }
+      {links? links.links.slice(0, max || 5).map(link =>
+        <Link onClick={() => links.popD(link)} key={link} tabIndex='0' to={link}>{linkName(link)}</Link>
+      ) : home }
     </nav>)
 }
