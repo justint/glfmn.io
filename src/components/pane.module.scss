@@ -149,6 +149,23 @@ $text-element-color: $dark-gray;
         margin: 1em 0;
         padding: 0;
     }
+
+    :not(pre) > code {
+        font-style: normal;
+        color: $dark-fg1;
+        background-color: $dark-bg0_s;
+
+        &::before, &::after {
+            color: $dark-gray;
+            content: '`';
+        }
+    }
+
+    pre {
+        color: $dark-fg;
+        background-color: $dark-bg0_s;
+        padding: 1em 0;
+    }
 }
 
 .path {
@@ -281,7 +298,7 @@ $gutter-offset: 5em;
     }
 
     /// Absolute position relative to the item itself into the gutter
-    p, li, code, pre, h1, h2, h3, h4, h5, h6 {
+    p, li, pre, h1, h2, h3, h4, h5, h6 {
         position: relative;
         display: block;
 
