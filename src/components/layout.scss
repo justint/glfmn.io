@@ -14,7 +14,10 @@ html {
       & { font-size: 15px; }
   }
   @media (max-width: $mobile-size) {
-      & { font-size: 12.25px; }
+      & { font-size: 12px; }
+  }
+  @media (max-width: 380px) {
+      & { font-size: 11px; }
   }
   line-height: normal;
 }
@@ -44,6 +47,7 @@ body {
 }
 
 .page-footer {
+    z-index: 1;
     position: fixed;
     left: 0;
     right: 0;
@@ -58,22 +62,4 @@ a.plain {
         color: inherit !important;
         background-color: inherit !important;
     }
-}
-
-a.page-path, .page-path {
-    color: $dark-bright-aqua;
-    font-weight: bold;
-}
-
-a.page-path:hover {
-    color: $light-fg1;
-
-    .command {
-        color: $light-fg2;
-    }
-}
-
-.command {
-    color: $dark-yellow;
-    font-weight: normal;
 }
