@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import { graphql, Link } from "gatsby"
 import classNames from 'classnames'
-import Pane, { LineBox, Title, PushD, PushDContext, PushDProvider } from '../components/pane'
+import Pane, { Box, LineBox, Title, PushD, PushDContext } from '../components/pane'
 import { Progress } from '../components/text-ui/progress'
 
 import style from './post.module.scss'
@@ -11,7 +11,8 @@ export default function Template({
 }) {
     const { markdownRemark } = data // data.markdownRemark holds our post data
     const { frontmatter, html } = markdownRemark
-    const { author, title, date, path } = frontmatter;
+    const { author, title, date, path } = frontmatter
+    console.log(frontmatter)
 
     const {cd} = useContext(PushDContext)
 
@@ -28,6 +29,7 @@ export default function Template({
                 <LineBox className={style.postContainer} heading={
                     <Title author={author} date={date}>{title}</Title>
                 }>
+                    { frontmatter.draft && <DraftNotice/> }
                     <article
                         className={style.postContent}
                         dangerouslySetInnerHTML={{ __html: html }}
@@ -39,6 +41,12 @@ export default function Template({
     )
 }
 
+const DraftNotice = () => (
+    <Box style={{ margin: '2em', marginLeft: '2em', paddingLeft: '1em' }}>
+        <strong>Congratulations, you have found a draft aticle!  This article is incomplete and is here for proofreading and testing.</strong>
+    </Box>
+)
+
 export const pageQuery = graphql`
     query($path: String!) {
         markdownRemark(frontmatter: { path: { eq: $path } }) {
@@ -48,6 +56,7 @@ export const pageQuery = graphql`
                 path
                 title
                 author
+                draft
             }
         }
     }
