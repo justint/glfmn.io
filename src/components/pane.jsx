@@ -6,47 +6,41 @@ import { useWidth } from '../hooks'
 
 
 export default function Pane({foot, children}) {
-    const columnSource = useRef(null)
-    const columnWidth = 12
-    const width = useWidth(columnSource)
-
     return (
-        <section tabIndex='0' className={style.paneContainer}>
-            <div ref={columnSource} className={style.inner}>
+        <section tabIndex='0' className={style.paneContainer + ' ' + style.terminalTheme}>
+            <div>
                 { children }
-                <Progress label='read' progress={0.8} width={width}/>
             </div>
-            <footer className={style.path}>{foot}</footer>
+            <footer className={style.footer}>{foot}</footer>
         </section>
     )
 }
 
 
-export function Title({ title, author, date, children }) {
-    return (
-        <div className={style.boxContainer}>
-            <header className={style.titleContainer + ' ' + style.box} id={`${author}-${title}-${date}`}>
-                {title && <h2 className={style.title}> {title}</h2>}
-                {author && <span className={style.author}> {author}</span>}
-                {date && <p className={style.date}> {date}</p>}
-                {children && <p className={style.excerpt}>{children}</p>}
-            </header>
+export const Title = ({ excerpt, author, date, children }) => (
+    <React.Fragment>
+        {children && <h2 className={style.title}> {children}</h2>}
+        {author && <span className={style.author}> {author}</span>}
+        {date && <span className={style.date}> {date}</span>}
+        {excerpt && <span className={style.excerpt}>{excerpt}</span>}
+    </React.Fragment>
+)
+
+
+export const Box = ({ small, children }) => (
+    <div className={style.boxContainer}>
+        <div className={style.box}>
+            {children}
         </div>
-    )
-}
+    </div>
+)
+
 
 export const LineBox = ({heading, title, author, date, children}) => (
-    <div className={style.boxContainer}>
-        <div className={style.box + ' ' + style.lineNumbered}>
-            {(heading || title || author || date) && <header className={style.lineHeading}>
-                {heading}
-                {title && <h2 role="title" className={style.title}> {title}</h2>}
-                {author && <span role="author" className={style.author}> {author}</span>}
-                {date && <p role="publish date" className={style.date}> {date}</p>}
-            </header>}
-            <div className={style.textArea}>
-                {children || <p></p>}
-            </div>
+    <div className={style.lineBox}>
+        {heading && <header className={style.lineHeading}>{heading}</header>}
+        <div className={style.textArea}>
+            {children || <p></p>}
         </div>
     </div>
 )

@@ -7,29 +7,25 @@ $box-border: 1px solid $box-color;
 $link-color: $dark-yellow;
 $text-element-color: $dark-gray;
 
-.inner {
-    background-color: $dark-bg;
+.pane-container {
+    box-sizing: border-box;
 }
 
-.pane-container {
+.terminal-theme {
     font-size: 1rem;
     font-family: 'Source Code Pro', monospace;
     color: $dark-fg0;
-    background-color: $dark-bg1;
+    background-color: $dark-bg;
 
     *::selection {
         color: $light-fg0;
         background-color: $light-bg2;
     }
 
-    box-sizing: border-box;
-    margin: 1em 2em;
-    @media only screen and (max-width: $mobile-size) {
-        margin: 1em 0;
-    }
-
     h1, h2, h3, h4, h5, h6 {
-        margin-top: 1em;
+        font-weight: bold;
+        margin: 1em 0;
+        margin-top: 2em;
         font-size: 1em;
         line-height: normal;
 
@@ -39,16 +35,21 @@ $text-element-color: $dark-gray;
     }
 
     h3, h3::selection {
+        text-transform: uppercase;
         color: $dark-purple;
     }
 
     h4, h5, h6 {
-        font-weight: normal;
+        text-transform: capitalize;
         color: $dark-blue;
 
         &::selection {
             color: $dark-blue;
         }
+    }
+
+    h5, h6 {
+        font-weight: normal;
     }
 
     h3::before {
@@ -67,8 +68,22 @@ $text-element-color: $dark-gray;
         content: '#### ';
     }
 
+    em::before, em::after {
+        content: '_';
+        color: $dark-gray;
+    }
+
+    strong::before, strong::after {
+        content: '*';
+        color: $dark-gray;
+    }
+
     p {
         margin: 0;
+
+        & + p {
+            text-indent: 1.15em;
+        }
     }
 
     a {
@@ -89,12 +104,31 @@ $text-element-color: $dark-gray;
         }
     }
 
-    ul {
+    ol {
+        display: block;
+        margin: 1em 0;
+        padding: 0;
+
         list-style-type: none;
+        counter-reset: ol;
+        & > li::before {
+            content: counter(ol)'.';
+	          counter-increment: ol;
+
+            color: $dark-gray;
+            display: inline-block;
+            width: 2.4em;
+            text-align: right;
+            margin-right: 1.2em;
+        }
+    }
+
+    ul {
         padding: 0;
         display: block;
-        margin: 0;
+        margin: 1em 0;
 
+        list-style-type: none;
         li::before {
             color: $text-element-color;
             display: inline-block;
@@ -103,6 +137,17 @@ $text-element-color: $dark-gray;
             content: '*';
             text-align: right;
         }
+
+        p {
+            margin: 0;
+        }
+    }
+
+    blockquote {
+        color: $dark-fg2;
+        font-style: italic;
+        margin: 1em 0;
+        padding: 0;
     }
 }
 
@@ -122,12 +167,14 @@ $text-element-color: $dark-gray;
 .box {
     display: inline-block;
     margin: 4em auto;
+    padding: 2em;
     background-color: $dark-bg0;
     border: $box-border;
     text-align: left;
 }
 
 .title-container {
+    display: inline-block;
     min-width: 33%;
     max-width: 66%;
     max-width: minmax(66%, 20em);
@@ -135,6 +182,8 @@ $text-element-color: $dark-gray;
 }
 
 .title {
+    padding: 0;
+    margin: 0 !important;
     font-weight: 700;
 
     &::before {
@@ -144,6 +193,10 @@ $text-element-color: $dark-gray;
 }
 
 .author {
+    padding: 0;
+    margin: 0;
+    display: block;
+
     font-weight: 400;
 
     &::before {
@@ -153,7 +206,9 @@ $text-element-color: $dark-gray;
 }
 
 .date {
+    padding: 0;
     margin: 0;
+    display: block;
 
     &::before {
         content: 'date: ';
@@ -162,8 +217,8 @@ $text-element-color: $dark-gray;
 }
 
 .excerpt {
-    margin-bottom: 0;
-    margin-top: 1em;
+    display: block;
+    padding-top: 1em;
 }
 
 $column-size: 1em;
@@ -177,15 +232,24 @@ $gutter-offset: 5em;
 /// is to allow elements that need the ::before content to still have content
 /// appear directly before the element and still count towards the line count.
 
-.line-numbered {
+.line-box {
     display: block;
     margin: 0;
     padding-left: $gutter-size;
     padding-right: $column-size;
-    position: relative;
+
+}
+
+.footer {
+    background-color: $dark-bg1;
+    position: sticky;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .textArea {
+    position: relative;
     border-left: $box-border;
     padding: $column-size-2 0;
     padding-left: $column-size;
@@ -193,6 +257,7 @@ $gutter-offset: 5em;
     counter-reset: line-numbers;
 
     a::before {
+        z-index: 2;
         content: '~';
         position: absolute;
         left: -$column-size-2;
@@ -202,17 +267,31 @@ $gutter-offset: 5em;
         color: $link-color;
     }
 
-    /// Absolute position relative to the item itself, therefore each
-    /// item must be a block
+    blockquote {
+        p::before {
+            content: '';
+        }
+        &::before {
+            content: '>';
+            color: $dark-fg3;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+    }
+
+    /// Absolute position relative to the item itself into the gutter
     p, li, code, pre, h1, h2, h3, h4, h5, h6 {
         position: relative;
         display: block;
+
+        counter-increment: line-numbers;
         &::after {
-            counter-increment: line-numbers;
             content: counter(line-numbers);
 
             color: $text-element-color;
             font-weight: normal;
+            font-style: normal;
             display: inline-block;
 
             position: absolute;
@@ -223,11 +302,6 @@ $gutter-offset: 5em;
             padding-right: $column-size;
             text-align: right;
         }
-    }
-
-    p::before {
-        color: $box-color;
-        content: '····';
     }
 }
 
