@@ -5,7 +5,7 @@
 html {
   color: $light-fg;
   background-color: $light-bg;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Source Code Pro', monospace;
   text-size-adjust: 100%;
 
   font-size: 14px;
@@ -37,4 +37,43 @@ body {
     width: 100%;
     margin: 0;
     padding: 0;
+}
+
+.page-content {
+    padding-bottom: 6em;
+}
+
+.page-footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+a.plain {
+    color: inherit !important;
+    background-color: inherit !important;
+
+    &:hover {
+        color: inherit !important;
+        background-color: inherit !important;
+    }
+}
+
+a.page-path, .page-path {
+    color: $dark-bright-aqua;
+    font-weight: bold;
+}
+
+a.page-path:hover {
+    color: $light-fg1;
+
+    .command {
+        color: $light-fg2;
+    }
+}
+
+.command {
+    color: $dark-yellow;
+    font-weight: normal;
 }

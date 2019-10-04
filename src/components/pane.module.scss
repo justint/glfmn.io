@@ -8,6 +8,7 @@ $link-color: $dark-yellow;
 $text-element-color: $dark-gray;
 
 .pane-container {
+    position: relative;
     box-sizing: border-box;
 }
 
@@ -100,7 +101,6 @@ $text-element-color: $dark-gray;
         &:hover {
             background-color: $link-color;
             color: $dark-bg0;
-            border-bottom: none;
         }
     }
 
@@ -165,6 +165,7 @@ $text-element-color: $dark-gray;
         color: $dark-fg;
         background-color: $dark-bg0_s;
         padding: 1em 0;
+        overflow: scroll;
     }
 }
 
@@ -229,13 +230,41 @@ $text-element-color: $dark-gray;
 
     &::before {
         content: 'date: ';
-        color: $dark-yellow;
+        color: $dark-purple;
     }
 }
 
 .excerpt {
     display: block;
     padding-top: 1em;
+}
+
+.pushd {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+    a {
+        margin: 0 1em;
+        &:first-child {
+            margin-left: 0;
+        }
+
+        &last-child {
+            margin-right: 0;
+        }
+    }
+
+    .pushd-current {
+        font-weight: bold;
+        color: $dark-bright-aqua;
+        align-self: flex-start;
+        order: -1;
+        margin-right: auto;
+    }
 }
 
 $column-size: 1em;
@@ -254,10 +283,14 @@ $gutter-offset: 5em;
     margin: 0;
     padding-left: $gutter-size;
     padding-right: $column-size;
-
+    @media screen and (min-width: $large-size) {
+        margin: 0 auto;
+        max-width: 800px;
+    }
 }
 
 .footer {
+    z-index: 3;
     background-color: $dark-bg1;
     position: sticky;
     left: 0;
@@ -265,11 +298,28 @@ $gutter-offset: 5em;
     bottom: 0;
 }
 
-.textArea {
+.line-heading {
+    padding-left: $column-size;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-bottom: $box-border;
+    border-left: $box-border;
+
+    @media screen and (min-width: $large-size) {
+        border-right: $box-border;
+    }
+}
+
+.text-area {
     position: relative;
     border-left: $box-border;
+    border-bottom: $box-border;
+    @media screen and (min-width: $large-size) {
+        border-right: $box-border;
+    }
     padding: $column-size-2 0;
     padding-left: $column-size;
+    padding-bottom: 2em;
 
     counter-reset: line-numbers;
 
@@ -320,12 +370,4 @@ $gutter-offset: 5em;
             text-align: right;
         }
     }
-}
-
-.line-heading {
-    padding-left: $column-size;
-    padding-top: 1em;
-    padding-bottom: 1em;
-    border-bottom: $box-border;
-    border-left: $box-border;
 }

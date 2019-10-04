@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import style from './text-ui.module.scss'
 import { useWidth } from '../../hooks'
 
-export function Progress({ label, width, progress }) {
+export function Progress({ label, width, progress, ...props }) {
     const left = '╢'
     const right = '╟'
     const filler = '░'
@@ -17,7 +17,7 @@ export function Progress({ label, width, progress }) {
     const barWidth = Math.max(columns - labelSize - 2, 5);
     const finished = Math.floor(Math.max(0, Math.min(barWidth, progress * barWidth)))
     return (
-        <div className={style.uiContainer}>
+        <div {...props} className={style.uiContainer}>
             { label && labelSize < columns-5 && <span className={style.label}>{label + ' '}</span> }
             <span ref={leftEl} className={style.uiDecorative}>{left}</span>
             <span>{full.repeat(finished)}</span>

@@ -9,9 +9,11 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Link, useStaticQuery, graphql } from "gatsby"
 
-import Header from "./header"
-import Footer from "./footer"
-import "./layout.scss"
+import Header from './header'
+import Footer from './footer'
+import { PushDProvider } from './pane'
+
+import './layout.scss'
 
 const Layout = ({ children }) => {
     const data = useStaticQuery(graphql`
@@ -27,16 +29,14 @@ const Layout = ({ children }) => {
     const { title } = data.site.siteMetadata
 
     return (
-        <>
-            <div className='page-container'>
-                <Header className='page-header' siteTitle={title} />
-                <main className='page-content'>{children}</main>
-                <Footer>
-                    <Link to='/'>/home/{title}</Link>
-                    <a href='https://GitHub.com/glfmn'>GitHub://glfmn/</a>
-                </Footer>
-            </div>
-        </>
+        <div className='page-container'>
+            <Header className='page-header' siteTitle={title} />
+            <main className='page-content'>{children}</main>
+            <Footer className='page-footer'>
+                <Link to='/'>/home/glfmn</Link>
+                <a href='https://GitHub.com/glfmn'>GitHub://glfmn/</a>
+            </Footer>
+        </div>
     )
 }
 

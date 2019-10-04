@@ -1,0 +1,91 @@
+@import '../colors';
+@import '../constants';
+
+.post-container {
+    @media screen and (min-width: $mobile-size) {
+        padding: 1em;
+        margin: 1em auto;
+    }
+
+    * {
+        position: relative;
+        z-index: 1;
+    }
+
+    margin: 1em 0;
+    max-width: 800px;
+    max-width: calc(800px + 20%);
+    position: relative;
+}
+
+.post-background {
+    text-align: left;
+    z-index: 0 !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: $dark-gray
+}
+
+%post-selected {
+    border-color: $dark-fg1;
+    .post-link,  {
+        color: $dark-bg0;
+        background-color: $dark-yellow;
+
+        &::after {
+            color: $dark-yellow;
+        }
+    }
+}
+
+.post-title {
+    min-width: 15em;
+    width: 60%;
+    max-width: 750px;
+
+    &:hover {
+        @extend %post-selected;
+    }
+}
+
+a:focus .post-title {
+    @extend %post-selected;
+}
+
+.post-link {
+    display: inline-block;
+    margin-top: 2em;
+
+    position: relative;
+
+    border-bottom: 1px dashed $dark-yellow;
+
+    color: $dark-yellow;
+
+    &::after {
+        content: '->';
+        position: absolute;
+        right: -2em;
+    }
+}
+
+a.page-path, .page-path {
+    color: $dark-bright-aqua;
+    font-weight: bold;
+}
+
+a.page-path:hover {
+    color: $light-fg1;
+
+    .command {
+        color: $light-fg2;
+    }
+}
+
+.command {
+    color: $dark-yellow;
+    font-weight: normal;
+}

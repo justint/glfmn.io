@@ -1,0 +1,32 @@
+@import '../colors';
+
+.links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: $dark-bg2;
+
+    * {
+        margin: 0 1em;
+    }
+}
+
+.file {
+    color: $dark-bright-aqua;
+    font-weight: bold;
+}
+
+.go-back {
+    display: inline-block;
+    margin-top: 2em;
+    &::before {
+        content: '<-' !important;
+    }
+}
+
+.post-container {
+    min-height: 100vh;
+    min-height: calc(100vh - 2.75em);
+}

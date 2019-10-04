@@ -2807,6 +2807,11 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
+classnames@^2.2.6:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
+  integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
+
 clean-stack@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/clean-stack/-/clean-stack-2.2.0.tgz#ee8472dbb129e727b31e8a10a427dee9dfe4008b"
@@ -5271,6 +5276,13 @@ gatsby-page-utils@^0.0.23:
     lodash "^4.17.15"
     micromatch "^3.1.10"
     slash "^3.0.0"
+
+gatsby-plugin-layout@^1.1.10:
+  version "1.1.10"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-layout/-/gatsby-plugin-layout-1.1.10.tgz#be1f22dbe831470634ed39d6bb22ab2a2226fa05"
+  integrity sha512-FUvwZyH7YN1L1LUXQiUbqy/YfU7iC4ZfZZ5jD8btCO3yD2h3s6C1c8V35l7Yte9MAVBNGa+0ztKsqLLKKw1g7g==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
 
 gatsby-plugin-manifest@^2.2.20:
   version "2.2.20"
