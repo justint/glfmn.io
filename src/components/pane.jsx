@@ -34,6 +34,19 @@ export const Box = ({ className, children, ...props }) => (
     <div {...props} className={classNames(style.box, className)}>{children}</div>
 )
 
+export const LinkBox = ({ className, linkText, children, ...props }) => (
+    <Link
+        {...props}
+        linkText={linkText}
+        className={classNames(style.box, style.linkBox, className)}
+    >
+        { children }
+        <span className={style.linkBoxLinkText}>
+            {linkText}
+        </span>
+    </Link>
+)
+
 export const LineBox = ({ className, heading, children, ...props }) => (
     <div { ...props } className={classNames(style.lineBox, className)}>
         {heading && <header className={style.lineHeading}>{heading}</header>}
@@ -70,14 +83,14 @@ export function PushDProvider({children}) {
     )
 }
 
-export function PushD({ className, current, children, ...props }) {
+export function PushD({ className, max, current, children, ...props }) {
     const links = useContext(PushDContext)
     const home = <Link tabIndex='0' to='/'>/home/glfmn</Link>
     const linkName = link =>  link === '/'? '/home/glfmn' : `${link}.md`
 
     return (<nav {...props} className={classNames(style.pushd, className)}>
         { current && <span className={style.pushdCurrent}>~{linkName(current)}</span> }
-        {links? links.links.map(link =>
+        {links? links.links.slice(0, max || 5).map(link =>
             <Link onClick={() => links.popD(link)} key={link} tabIndex='0' to={link}>{linkName(link)}</Link>
         ) : home }
     </nav>)

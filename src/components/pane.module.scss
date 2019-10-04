@@ -182,6 +182,7 @@ $text-element-color: $dark-gray;
     text-align: center;
 }
 
+
 .box {
     display: inline-block;
     margin: 4em auto;
@@ -189,6 +190,45 @@ $text-element-color: $dark-gray;
     background-color: $dark-bg0;
     border: $box-border;
     text-align: left;
+
+    &:hover, &:focus {
+        border-color: $dark-fg1;
+        .link-box-link-text  {
+            color: $dark-bg0;
+            background-color: $dark-yellow;
+
+            &::after {
+                color: $dark-yellow;
+            }
+        }
+    }
+}
+
+a.box {
+    color: inherit;
+    border-bottom: $box-border;
+
+    &:hover {
+        color: inherit;
+        background-color: $dark-bg0;
+    }
+}
+
+.link-box-link-text {
+    display: inline-block;
+    margin-top: 2em;
+
+    position: relative;
+
+    border-bottom: 1px dashed $dark-yellow;
+
+    color: $dark-yellow;
+
+    &::after {
+        content: '->';
+        position: absolute;
+        right: -2em;
+    }
 }
 
 .title-container {

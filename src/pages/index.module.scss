@@ -29,47 +29,10 @@
     color: $dark-gray
 }
 
-%post-selected {
-    border-color: $dark-fg1;
-    .post-link,  {
-        color: $dark-bg0;
-        background-color: $dark-yellow;
-
-        &::after {
-            color: $dark-yellow;
-        }
-    }
-}
-
 .post-title {
     min-width: 15em;
     width: 60%;
     max-width: 750px;
-
-    &:hover {
-        @extend %post-selected;
-    }
-}
-
-a:focus .post-title {
-    @extend %post-selected;
-}
-
-.post-link {
-    display: inline-block;
-    margin-top: 2em;
-
-    position: relative;
-
-    border-bottom: 1px dashed $dark-yellow;
-
-    color: $dark-yellow;
-
-    &::after {
-        content: '->';
-        position: absolute;
-        right: -2em;
-    }
 }
 
 a.page-path, .page-path {
