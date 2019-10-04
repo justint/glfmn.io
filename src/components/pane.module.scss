@@ -98,7 +98,7 @@ $text-element-color: $dark-gray;
         border-bottom: 1px dashed;
         text-decoration: none;
 
-        &:hover {
+        &:hover, &:focus {
             background-color: $link-color;
             color: $dark-bg0;
         }
@@ -208,7 +208,7 @@ a.box {
     color: inherit;
     border-bottom: $box-border;
 
-    &:hover {
+    &:hover, &:focus {
         color: inherit;
         background-color: $dark-bg0;
     }
@@ -370,7 +370,7 @@ $gutter-offset: 5em;
         left: -$column-size-2;
         font-weight: bold;
     }
-    a:hover::before {
+    a:hover::before, a:focus::before {
         color: $link-color;
     }
 
