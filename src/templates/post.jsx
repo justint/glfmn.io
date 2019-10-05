@@ -20,20 +20,19 @@ export default function Template({
   // Set the element we will track for resizing
   const resize = useRef(null)
 
-  const contentHeight = window.innerHeight
-                    || document.documentElement.clientHeight
-                    || document.body.clientHeight
-                    || 300
-  const scrollHeight =  document? document.body.scrollHeight : 0
-  const height = scrollHeight > 0? scrollHeight - contentHeight : contentHeight
-
-  const [scroll, setScroll] = useState(0)
+  const [progress, setProgress] = useState(0)
   const [timer, setTimer] = useState(null)
   useEffect(() => {
     function onChange() {
       clearTimeout(timer)
       setTimer(setTimeout(() => {
-        setScroll(window.pageYOffset)
+        const contentHeight = window.innerHeight
+                           || document.documentElement.clientHeight
+                           || document.body.clientHeight
+                           || 300
+        const scrollHeight =  document.body.scrollHeight
+        const height = scrollHeight > 0? scrollHeight - contentHeight : contentHeight
+        setScroll(window.pageYOffset/height)
       }, 20))
     }
     window.addEventListener('scroll', onChange)
@@ -45,7 +44,7 @@ export default function Template({
       <ResizeProvider track={resize}>
         <Pane ref={resize} foot={
           <React.Fragment>
-            <Progress label='read' progress={Math.max(0, scroll/height)} width={400}/>
+            <Progress label='read' progress={Math.max(0, progress)} width={400}/>
             <PushD current={path}/>
           </React.Fragment>
         }>
