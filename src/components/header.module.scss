@@ -1,17 +1,39 @@
 @import '../colors';
 
-.title {
-    font-family: 'Ubuntu', 'Ubuntu Mono' sans-serif;
-    font-size: 2em;
-    font-weight: 300;
+.container {
+    color: $light-fg1;
     background-color: $light-bg2;
+}
 
-    a {
-        text-decoration: none;
-        color: inherit;
+.title {
+    display: inline-block;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 2em;
+    font-weight: normal;
+}
 
-        &:hover {
-            color: $light-fg3;
-        }
-    }
+.input {
+    display: inline-block;
+    background-color: inherit;
+    color: $light-gray;
+    caret-color: $light-fg1;
+    border: none;
+    font-size: 2em;
+    padding-left: 0.5em;
+}
+
+.user {
+    color: $light-bright-blue;
+}
+
+.host {
+    color: $light-blue;
+}
+
+.path {
+    color: $light-bright-yellow;
+}
+
+.prompt {
+    color: $light-fg0;
 }

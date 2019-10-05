@@ -1,16 +1,33 @@
+import React, { useState } from "react"
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React from "react"
+
+import classNames from 'classnames'
 import styles from "./header.module.scss"
 
-const Header = ({ className, siteTitle }) => (
-    <header className={className}>
-        <h1 className={styles.title}><Link to='/'>{siteTitle}</Link></h1>
+export default function Header({ className, siteTitle }) {
+  const [ query, setQuery ] = useState('')
+  return (
+    <header className={classNames(className, styles.container)}>
+      <h1 className={styles.title}>
+        <span className={styles.user}>{siteTitle}</span>
+        <span>@</span>
+        <span className={styles.host}>blog</span>
+        <span className={styles.path}>~</span>
+        <span className={styles.prompt}>$</span>
+      </h1>
+      <input
+        className={styles.input}
+        type='text'
+        name='cli'
+        value={query}
+        onChange={e => setQuery(e.target.value)}
+        autofocus
+      />
     </header>
-)
+  )
+}
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
 }
-
-export default Header
