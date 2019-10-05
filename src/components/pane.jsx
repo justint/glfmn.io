@@ -6,11 +6,12 @@ import classNames from 'classnames'
 
 import style from './pane.module.scss'
 
-export default function Pane({ className, foot, children, ...props }) {
+const Pane = React.forwardRef(({ className, foot, children, ...props }, ref) => {
     return (
         <section
-            {...props}
-            className={classNames(style.paneContainer, style.terminalTheme, className)}
+          {...props}
+          ref={ref}
+          className={classNames(style.paneContainer, style.terminalTheme, className)}
         >
             <div>
                 { children }
@@ -18,8 +19,9 @@ export default function Pane({ className, foot, children, ...props }) {
             <footer className={style.footer}>{foot}</footer>
         </section>
     )
-}
+})
 
+export default Pane;
 
 export const Title = ({ excerpt, author, date, children }) => (
     <>

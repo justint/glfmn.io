@@ -162,10 +162,11 @@ $text-element-color: $dark-gray;
     }
 
     pre {
+        font-size: 1em;
         color: $dark-fg;
         background-color: $dark-bg0_s;
         padding: 1em 0;
-        overflow: scroll;
+        overflow-x: scroll;
     }
 }
 
@@ -282,7 +283,7 @@ a.box {
 .pushd {
     display: flex;
     flex-wrap: no-wrap;
-    overflow: scroll;
+    overflow-x: hidden;
     justify-content: flex-end;
     white-space: pre;
     flex-direction: row;
@@ -395,7 +396,7 @@ $gutter-offset: 5em;
     }
 
     /// Absolute position relative to the item itself into the gutter
-    p, li, pre, h1, h2, h3, h4, h5, h6 {
+    p, li, h1, h2, h3, h4, h5, h6 {
         position: relative;
         display: block;
 

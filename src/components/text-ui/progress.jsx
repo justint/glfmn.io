@@ -1,30 +1,33 @@
-import React, { useRef } from 'react'
+import React, { useRef, useContext } from 'react'
 import style from './text-ui.module.scss'
-import { useWidth } from '../../hooks'
+import { ResizeContext } from '../../resize'
 
-export function Progress({ label, width, progress, ...props }) {
-    const left = '╢'
-    const right = '╟'
-    const filler = '░'
-    const full = '▒'
+export function Progress({ label, progress, ...props }) {
+  const left = '╢'
+  const right = '╟'
+  const filler = '░'
+  const full = '▒'
 
-    const leftEl = useRef(null)
-    const columnWidth = useWidth(leftEl)
+  const leftEl = useRef(null)
+  // const columnWidth = useWidth(leftEl)
+  const rect = useContext(ResizeContext)
+  const width = rect? rect.width : 300
+  const columnWidth = 9
 
-    const columns = Math.floor((width - columnWidth)/Math.max(columnWidth, 1));
+  const columns = Math.floor((width - columnWidth)/Math.max(columnWidth, 1));
 
-    const labelSize = label? label.length + 1 : 0
-    const barWidth = Math.max(columns - labelSize - 2, 5);
-    const finished = Math.floor(Math.max(0, Math.min(barWidth, progress * barWidth)))
-    return (
-        <div {...props} className={style.uiContainer}>
-            { label && labelSize < columns-5 && <span className={style.label}>{label + ' '}</span> }
-            <span ref={leftEl} className={style.uiDecorative}>{left}</span>
-            <span>{full.repeat(finished)}</span>
-            <span className={style.uiDecorative}>{filler.repeat(barWidth - finished)}</span>
-            <span className={style.uiDecorative}>{right}</span>
-        </div>
-    )
+  const labelSize = label? label.length + 1 : 0
+  const barWidth = Math.max(columns - labelSize - 2, 5)
+  const finished = Math.floor(Math.max(0, Math.min(barWidth, progress * barWidth)))
+  return (
+    <div {...props} className={style.uiContainer}>
+      { label && labelSize < columns-5 && <span className={style.label}>{label + ' '}</span> }
+      <span ref={leftEl} className={style.uiDecorative}>{left}</span>
+      <span>{full.repeat(finished)}</span>
+      <span className={style.uiDecorative}>{filler.repeat(barWidth - finished)}</span>
+      <span className={style.uiDecorative}>{right}</span>
+    </div>
+  )
 }
 
 export function Range(props) {
