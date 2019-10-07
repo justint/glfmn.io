@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from 'react'
+import React, { useRef, useState, useEffect, useContext } from 'react'
 import style from './text-ui.module.scss'
 import { ResizeContext } from '../../resize'
 
@@ -8,11 +8,18 @@ export function Progress({ label, progress, ...props }) {
   const filler = '░'
   const full = '▒'
 
-  const leftEl = useRef(null)
-  // const columnWidth = useWidth(leftEl)
   const rect = useContext(ResizeContext)
   const width = rect? rect.width : 300
-  const columnWidth = 9
+
+  const leftEl = useRef(null)
+  const [columnWidth, setColumnWidth] = useState(9)
+  useEffect(
+    () => {
+      'current' in leftEl &&
+      setColumnWidth(leftEl.current.getBoundingClientRect().width)
+    },
+    [leftEl, width]
+  )
 
   const columns = Math.floor((width - columnWidth)/Math.max(columnWidth, 1));
 
