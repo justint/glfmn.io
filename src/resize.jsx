@@ -3,7 +3,7 @@ import ResizeObserver from 'resize-observer-polyfill';
 
 export const ResizeContext = React.createContext({});
 
-export function ResizeProvider({ track, children }) {
+export default function ResizeProvider({ track, children }) {
 
   const rect = useResize(track)
 

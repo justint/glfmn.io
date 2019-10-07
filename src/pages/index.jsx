@@ -1,37 +1,41 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 import Layout from '../components/layout'
 import Pane, { LinkBox, Title, PushDContext } from '../components/pane'
 import SEO from '../components/seo'
+import ResizeProvider from '../resize'
 
 import style from './index.module.scss'
 
 export default function IndexPage({ data }) {
-    const { edges: posts } = data.allMarkdownRemark
-    const { cd } = useContext(PushDContext)
+  const { edges: posts } = data.allMarkdownRemark
+  const { cd } = useContext(PushDContext)
 
-    const onClick = to => () => {
-        cd(to, '/')
-    }
+  const onClick = to => () => {
+    cd(to, '/')
+  }
 
-    return (
-      <Layout>
-        <SEO title="Home" />
-        {posts
-          .filter(post => post.node.frontmatter.title.length > 0)
-          .map(({ node: { id, frontmatter } }) => (
-            <Preview id={id} onClick={onClick} {...frontmatter} />
-          ))
-        }
-      </Layout>
-    )
+  return (
+    <Layout>
+      <SEO title="Home" />
+      {posts
+        .filter(post => post.node.frontmatter.title.length > 0)
+        .map(({ node: { id, frontmatter } }) => (
+          <Preview id={id} onClick={onClick} {...frontmatter} />
+        ))
+      }
+    </Layout>
+  )
 }
 
 function Preview({ id, path, onClick, title, author, date, summary, Bg }) {
+  const container = useRef(null)
   return (
     <div key={id} className={style.postContainer}>
       <Pane foot={<span className={style.pagePath}>{path}.md</span>}>
         <div style={{ textAlign: 'center', position: 'relative' }}>
-          <div className={style.postBackground}>{ Bg && <Bg/> }</div>
+          <div ref={container} className={style.postBackground}>
+            { Bg && <ResizeProvider track={container}><Bg/></ResizeProvider> }
+          </div>
           <LinkBox
             linkText={`open ${path}.md`}
             to={path} tabIndex='0'
