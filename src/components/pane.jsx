@@ -1,25 +1,23 @@
-import React, { Component, useRef, useState, useContext } from 'react'
-import PropTypes from 'prop-types'
+import React, { useState, useContext } from 'react'
 import { Link } from 'gatsby'
-import { Progress } from "./text-ui/progress"
 import classNames from 'classnames'
 
 import style from './pane.module.scss'
 
-const Pane = React.forwardRef(({ className, foot, children, ...props }, ref) => {
-    return (
-        <section
-          {...props}
-          ref={ref}
-          className={classNames(style.paneContainer, style.terminalTheme, className)}
-        >
-            <div>
-                { children }
-            </div>
-            <footer className={style.footer}>{foot}</footer>
-        </section>
-    )
-})
+const Pane = React.forwardRef(({ className, foot, children, ...props }, ref) =>
+  (
+    <section
+      ref={ref}
+      {...props}
+      className={classNames(style.paneContainer, style.terminalTheme, className)}
+    >
+      <div>
+        { children }
+      </div>
+      <footer className={style.footer}>{foot}</footer>
+    </section>
+  )
+)
 
 export default Pane;
 
@@ -36,26 +34,27 @@ export const Box = ({ className, children, ...props }) => (
     <div {...props} className={classNames(style.box, className)}>{children}</div>
 )
 
-export const LinkBox = ({ className, linkText, children, ...props }) => (
-    <Link
-        {...props}
-        linkText={linkText}
-        className={classNames(style.box, style.linkBox, className)}
-    >
-        { children }
-        <span className={style.linkBoxLinkText}>
-            {linkText}
-        </span>
-    </Link>
-)
+export const LinkBox = React.forwardRef(({ className, linkText, children, ...props }, ref) => (
+  <Link
+    ref={ref}
+    {...props}
+    linkText={linkText}
+    className={classNames(style.box, style.linkBox, className)}
+  >
+    { children }
+    <span className={style.linkBoxLinkText}>
+      {linkText}
+    </span>
+  </Link>
+))
 
 export const LineBox = ({ className, heading, children, ...props }) => (
-    <div { ...props } className={classNames(style.lineBox, className)}>
-        {heading && <header className={style.lineHeading}>{heading}</header>}
-        <div className={style.textArea}>
-            {children || <p></p>}
-        </div>
+  <div { ...props } className={classNames(style.lineBox, className)}>
+    {heading && <header className={style.lineHeading}>{heading}</header>}
+    <div className={style.textArea}>
+      {children || <p></p>}
     </div>
+  </div>
 )
 
 export const PushDContext = React.createContext();
@@ -64,17 +63,17 @@ export function PushDProvider({children}) {
     const [ links, setLinks ] = useState(['/'])
 
     const pushD = (link) => {
-        const filtered = links.filter(l => l != link)
+        const filtered = links.filter(l => l !== link)
         setLinks([link, ...filtered])
     }
 
     const popD = (link) => {
-        const filtered = links.filter(l => l != link)
+        const filtered = links.filter(l => l !== link)
         setLinks(filtered)
     }
 
     const cd = (to, current) => {
-        const reduced = [current, ...(links.filter(l => l != to && l != current))]
+        const reduced = [current, ...(links.filter(l => l !== to && l !== current))]
         setLinks(reduced)
     }
 

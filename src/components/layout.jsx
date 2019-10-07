@@ -11,7 +11,6 @@ import { Link, useStaticQuery, graphql } from "gatsby"
 
 import Header from './header'
 import Footer from './footer'
-import { PushDProvider } from './pane'
 
 import './layout.scss'
 
