@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react"
 import { graphql, Link } from "gatsby"
-import classNames from 'classnames'
 import Pane, { Box, LineBox, Title, PushD, PushDContext } from '../components/pane'
 import { Progress } from '../components/text-ui/progress'
 import { ResizeProvider } from '../resize'
@@ -20,24 +19,8 @@ export default function Template({
   // Set the element we will track for resizing
   const resize = useRef(null)
 
-  const [progress, setProgress] = useState(0)
-  const [timer, setTimer] = useState(null)
-  useEffect(() => {
-    function onChange() {
-      clearTimeout(timer)
-      setTimer(setTimeout(() => {
-        const contentHeight = window.innerHeight
-                           || document.documentElement.clientHeight
-                           || document.body.clientHeight
-                           || 300
-        const scrollHeight =  document.body.scrollHeight
-        const height = scrollHeight > 0? scrollHeight - contentHeight : contentHeight
-        setScroll(window.pageYOffset/height)
-      }, 20))
-    }
-    window.addEventListener('scroll', onChange)
-    return () => window.removeEventListener('scroll', onChange)
-  })
+  // Track scroll amount for progress bar
+  const progress = useScrollProgress()
 
   return (
     <div className="blog-post-container">
@@ -66,21 +49,44 @@ export default function Template({
 
 const DraftNotice = () => (
     <Box style={{ margin: '2em', marginLeft: '2em', paddingLeft: '1em' }}>
-        <strong>Congratulations, you have found a draft aticle!  This article is incomplete and is here for proofreading and testing.</strong>
+        <strong>This is a draft article; it is incomplete but is available for proofreading and testing.</strong>
     </Box>
 )
 
-export const pageQuery = graphql`
-    query($path: String!) {
-        markdownRemark(frontmatter: { path: { eq: $path } }) {
-            html
-            frontmatter {
-                date(formatString: "YYYY-MM-DD")
-                path
-                title
-                author
-                draft
-            }
-        }
+function useScrollProgress() {
+  const [progress, setProgress] = useState(0)
+  const [timer, setTimer] = useState(null)
+  useEffect(() => {
+    function onChange() {
+      clearTimeout(timer)
+      setTimer(setTimeout(() => {
+        const contentHeight = window.innerHeight
+                           || document.documentElement.clientHeight
+                           || document.body.clientHeight
+                           || 300
+        const scrollHeight =  document.body.scrollHeight
+        const height = scrollHeight > 0? scrollHeight - contentHeight : contentHeight
+        setProgress(window.pageYOffset/height)
+      }, 25))
     }
+    window.addEventListener('scroll', onChange)
+    return () => window.removeEventListener('scroll', onChange)
+  })
+
+  return progress
+}
+
+export const pageQuery = graphql`
+  query($path: String!) {
+    markdownRemark(frontmatter: { path: { eq: $path } }) {
+      html
+      frontmatter {
+        date(formatString: "YYYY-MM-DD")
+        path
+        title
+        author
+        draft
+      }
+    }
+  }
 `
