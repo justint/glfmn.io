@@ -16,19 +16,20 @@ export function ResizeProvider({ track, children }) {
 
 export function useResize(ref) {
   const [rect, setRect] = useState(null)
+  const [current, setCurrent] = useState(null)
   const [observer,] = useState(
     new ResizeObserver((entries, observer) => {
       for (const entry of entries) {
-        console.log(entry, entry.contentRect)
         setRect(entry.contentRect)
       }
     }))
 
   useEffect(() => {
-    console.log(ref, observer)
-    ref && ref.current && observer.observe(ref.current)
-    return () => ref && ref.current && observer.unobserve(ref.current)
-  }, [ref])
+    let old = current
+    ref && ref.current && setCurrent(ref.current)
+    current && observer.observe(current)
+    return () => old && observer.unobserve(old)
+  }, [ref, current, observer])
 
   return rect
 }
