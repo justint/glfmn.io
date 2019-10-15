@@ -329,7 +329,9 @@ $gutter-offset: 5em;
 .line-box {
     display: block;
     margin: 0;
-    padding-left: $gutter-size;
+    @media screen and (min-width: $mobile-size) {
+        padding-left: $gutter-size;
+    }
     padding-right: $column-size;
     @media screen and (min-width: $large-size) {
         margin: 0 auto;
@@ -362,60 +364,67 @@ $gutter-offset: 5em;
     position: relative;
     border-left: $box-border;
     border-bottom: $box-border;
+
     @media screen and (min-width: $large-size) {
         border-right: $box-border;
     }
-    padding: $column-size-2 0;
-    padding-left: $column-size;
+
     padding-bottom: 2em;
 
-    counter-reset: line-numbers;
+    @media screen and (min-width: $mobile-size) {
+        padding: $column-size-2 0;
+        padding-left: $column-size;
+        counter-reset: line-numbers;
 
-    a::before {
-        z-index: 2;
-        content: '~';
-        position: absolute;
-        left: -$column-size-2;
-        font-weight: bold;
-    }
-    a:hover::before, a:focus::before {
-        color: $link-color;
-    }
-
-    blockquote {
-        p::before {
-            content: '';
-        }
-        &::before {
-            content: '>';
-            color: $dark-fg3;
+        a::before {
+            z-index: 2;
+            content: '~';
+            position: absolute;
+            left: -$column-size-2;
             font-weight: bold;
-            position: absolute;
-            left: 0;
         }
-    }
-
-    /// Absolute position relative to the item itself into the gutter
-    p, li, h1, h2, h3, h4, h5, h6 {
-        position: relative;
-        display: block;
-
-        counter-increment: line-numbers;
-        &::after {
-            content: counter(line-numbers);
-
-            color: $text-element-color;
-            font-weight: normal;
-            font-style: normal;
-            display: inline-block;
-
-            position: absolute;
-            top: 0;
-            left: -$gutter-offset;
-
-            width: 3em;
-            padding-right: $column-size;
-            text-align: right;
+        a:hover::before, a:focus::before {
+            color: $link-color;
+        }
+    
+        blockquote {
+            p::before {
+                content: '';
+            }
+            &::before {
+                content: '>';
+                color: $dark-fg3;
+                font-weight: bold;
+                position: absolute;
+                left: 0;
+            }
+        }
+    
+        /// Absolute position relative to the item itself into the gutter
+        p, li, h1, h2, h3, h4, h5, h6 {
+            position: relative;
+            display: block;
+    
+            counter-increment: line-numbers;
+            &::after {
+                content: counter(line-numbers);
+    
+                color: $text-element-color;
+                font-weight: normal;
+                font-style: normal;
+                display: inline-block;
+    
+                position: absolute;
+                top: 0;
+                left: -$gutter-offset;
+    
+                width: 3em;
+                padding-right: $column-size;
+                text-align: right;
+            }
+            &:hover::after {
+                color: $dark-fg0;
+            }
         }
     }
 }
