@@ -1,17 +1,16 @@
-import React, { useState, useEffect, useRef, useContext } from "react"
-import { graphql, Link } from "gatsby"
+import React, { useState, useEffect, useRef, useContext } from 'react'
+import SEO from '../components/seo'
+import { graphql, Link } from 'gatsby'
 import Pane, { Box, LineBox, Title, PushD, PushDContext } from '../components/pane'
 import { Progress } from '../components/text-ui/progress'
 import ResizeProvider from '../resize'
 
 import style from './post.module.scss'
 
-export default function Template({
-    data, // this prop will be injected by the GraphQL query below.
-}) {
-  const { markdownRemark } = data // data.markdownRemark holds our post data
+export default function Template({ data }) {
+  const { markdownRemark } = data
   const { frontmatter, html } = markdownRemark
-  const { author, title, date, path } = frontmatter
+  const { author, title, date, path, summary } = frontmatter
 
   const {cd} = useContext(PushDContext)
   const onClick = (from, to) => () => cd(to, from)
@@ -24,6 +23,7 @@ export default function Template({
 
   return (
     <div className="blog-post-container">
+      <SEO title={title} description={summary}/>
       <ResizeProvider track={resize}>
         <Pane ref={resize} foot={
           <React.Fragment>
@@ -39,7 +39,9 @@ export default function Template({
               className={style.postContent}
               dangerouslySetInnerHTML={{ __html: html }}
             />
-            <Link onClick={onClick(path, '/')} tabIndex="0" className={style.goBack} to="/">Go back</Link>
+            <Link onClick={onClick(path, '/')} tabIndex="0" className={style.goBack} to="/">
+              Go back
+            </Link>
           </LineBox>
         </Pane>
       </ResizeProvider>
@@ -49,31 +51,44 @@ export default function Template({
 
 const DraftNotice = () => (
     <Box style={{ margin: '2em', marginLeft: '2em', paddingLeft: '1em' }}>
-        <strong>This is a draft article; it is incomplete but is available for proofreading and testing.</strong>
+        <strong>This is a draft article; it is available for proofreading and testing.</strong>
     </Box>
 )
 
 function useScrollProgress() {
   const [progress, setProgress] = useState(0)
   const [timer, setTimer] = useState(null)
+  const [[height, scrollHeight, contentHeight], setHeight] = useState(pageHeight())
+
   useEffect(() => {
     function onChange() {
       clearTimeout(timer)
       setTimer(setTimeout(() => {
-        const contentHeight = window.innerHeight
-                           || document.documentElement.clientHeight
-                           || document.body.clientHeight
-                           || 300
-        const scrollHeight =  document.body.scrollHeight
-        const height = scrollHeight > 0? scrollHeight - contentHeight : contentHeight
-        setProgress(window.pageYOffset/height)
+        setHeight(pageHeight())
+        if (height < 2) {
+          setProgress(1)
+        } else {
+          setProgress(window.pageYOffset/height)
+        }
       }, 25))
     }
     window.addEventListener('scroll', onChange)
     return () => window.removeEventListener('scroll', onChange)
-  })
+  }, [height, scrollHeight, contentHeight])
 
   return progress
+}
+
+function pageHeight() {
+  if (!window || !document) {
+    return [0, 0, 0];
+  }
+  const contentHeight = window.innerHeight
+    || document.documentElement.clientHeight
+    || document.body.clientHeight
+  const scrollHeight =  document.body.scrollHeight
+  const height = scrollHeight > 0? scrollHeight - contentHeight : contentHeight
+  return [height, scrollHeight, contentHeight]
 }
 
 export const pageQuery = graphql`
@@ -86,6 +101,7 @@ export const pageQuery = graphql`
         title
         author
         draft
+        summary
       }
     }
   }
