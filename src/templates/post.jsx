@@ -80,7 +80,7 @@ function useScrollProgress() {
 }
 
 function pageHeight() {
-  if (!window || !document) {
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
     return [0, 0, 0];
   }
   const contentHeight = window.innerHeight
