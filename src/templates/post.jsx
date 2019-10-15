@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from "react"
 import { graphql, Link } from "gatsby"
 import Pane, { Box, LineBox, Title, PushD, PushDContext } from '../components/pane'
 import { Progress } from '../components/text-ui/progress'
-import { ResizeProvider } from '../resize'
+import ResizeProvider from '../resize'
 
 import style from './post.module.scss'
 

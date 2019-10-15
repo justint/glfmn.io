@@ -20,17 +20,17 @@ export default function IndexPage({ data }) {
       {posts
         .filter(post => post.node.frontmatter.title.length > 0)
         .map(({ node: { id, frontmatter } }) => (
-          <Preview id={id} onClick={onClick} {...frontmatter} />
+          <Preview key={id} onClick={onClick} {...frontmatter} />
         ))
       }
     </Layout>
   )
 }
 
-function Preview({ id, path, onClick, title, author, date, summary, Bg }) {
+function Preview({ path, onClick, title, author, date, summary, Bg }) {
   const container = useRef(null)
   return (
-    <div key={id} className={style.postContainer}>
+    <div className={style.postContainer}>
       <Pane foot={<span className={style.pagePath}>{path}.md</span>}>
         <div style={{ textAlign: 'center', position: 'relative' }}>
           <div ref={container} className={style.postBackground}>

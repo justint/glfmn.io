@@ -21,7 +21,7 @@ export default function Header({ className, siteTitle }) {
         name='cli'
         value={query}
         onChange={e => setQuery(e.target.value)}
-        autofocus
+        autoFocus
       />
     </header>
   )

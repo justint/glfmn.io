@@ -38,7 +38,6 @@ export const LinkBox = React.forwardRef(({ className, linkText, children, ...pro
   <Link
     ref={ref}
     {...props}
-    linkText={linkText}
     className={classNames(style.box, style.linkBox, className)}
   >
     { children }
