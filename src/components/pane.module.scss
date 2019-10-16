@@ -187,6 +187,23 @@ $text-element-color: $dark-gray;
         padding: 1em 0;
         overflow-x: scroll;
     }
+
+    table {
+        border-collapse: collapse;
+        padding-right: 1em;
+        margin: 1em 0;
+    }
+
+    th {
+        border: $box-border;
+        padding: 1em;
+    }
+
+    td {
+        padding-left: 1em;
+        padding-right: 1em;
+        border: $box-border;
+    }
 }
 
 .path {
@@ -385,7 +402,7 @@ $gutter-offset: 5em;
         }
     
         /// Absolute position relative to the item itself into the gutter
-        p, li, h1, h2, h3, h4, h5, h6 {
+        p, li, h1, h2, h3, h4, h5, h6, table {
             position: relative;
             display: block;
     
