@@ -1,4 +1,5 @@
 import React, { useContext, useRef } from 'react'
+import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import Pane, { LinkBox, Title } from '../components/pane'
 import { PushDContext } from '../components/pushd'
