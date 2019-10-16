@@ -14,7 +14,31 @@ module.exports = {
         path: `${__dirname}/content/posts`,
       }
     },
-    `gatsby-transformer-remark`,
+    { 
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [{
+          resolve: `gatsby-remark-vscode`,
+          options: {
+            colorTheme: 'Gruvbox Dark (Medium)',
+            extensions: [
+              {
+                identifier: 'tomphilbin.gruvbox-themes',
+                version: '1.0.0'
+              },
+              {
+                identifier: 'bmalehorn.vscode-fish',
+                version: '1.0.9'
+              },
+              {
+                identifier: 'ms-vscode.PowerShell',
+                version: '2019.9.0'
+              }
+            ]
+          }
+        }]
+      }
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {

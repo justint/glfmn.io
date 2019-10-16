@@ -23,7 +23,7 @@ Go to the [release](https://github.com/glfmn/glitter/releases) page and download
 
 To make sure Glitter is installed:
 
-```
+```bash
 $ glit "'hello from git'" -e "'hello'"
 ```
 
@@ -33,7 +33,7 @@ It will output `hello from git` if the current directory is in a git repository 
 
 Install the [rust toolchain](https://rustup.rs), `cmake` and `openssl` first, and then:
 
-```
+```term
 $ cargo install glit
 ```
 
@@ -89,7 +89,6 @@ PROMPT="%# "
 ```
 
 ##### fish
-
 
 Replace your `~/.config/fish/functions/fish_prompt.fish` file with or just paste the snippet in your shell to try it without doing anything permanent.
 
@@ -157,7 +156,7 @@ A glitter format is made of 4 types of expressions:
 You can provide other expressions as arguments to expressions which replace the default prefix which appears before the result or file count.  For example, `\h('@')` will output `@3`
 instead of `H3` if your repository has 3 stashes.  You can provide an arbitrary number of valid expressions as arguments to any of these expressions.
 
-```
+```bash
 $ glit "b"
 master
 $ glit "b('on branch ')"
@@ -189,7 +188,7 @@ $ glit "b<M>"
 
 Any characters between single quotes are strings. Strings appear untouched in the output; for example, `'exact'` outputs `exact`.
 
-```
+```bash
 $ glit "'hello world'"
 hello world
 $ glit "'\n\w\n\u'"
@@ -215,7 +214,7 @@ Separators appear between expressions to help differentiate or group them. Suppo
 
 Any number of separators can be used between two expressions
 
-```
+```bash
 $ glit "'hello', 'world'"
 hello, world
 $ glit "b@B::'git'"
@@ -228,14 +227,14 @@ master | origin/master      # no difference between master and tracking
 
 Separators will always print if _any_ expression in the group has printed before it, and if the expression _immediately_ after prints anything.
 
-```
+```bash
 glit "b [..B..]"            # [..B..] is a separate group
 master [origin/master]      # nothing prints before or after B
 ```
 
 This can lead to unexpected behavior like the following:
 
-```
+```bash
 $ glit "b MA"
 master M1A1                 # 1 staged change, 1 new file
 masterA1                    # no staged changes, 1 new file
@@ -243,7 +242,7 @@ masterA1                    # no staged changes, 1 new file
 
 The solution is to group the expressions that follow somehow:
 
-```
+```bash
 $ glit "b [MA]"
 master [A1]
 $ glit "b #~(MA)"           # tip: use reset style
@@ -286,7 +285,7 @@ Format styles can be combined in a single expression by just combining them:
 | `#g_('...')`   | green underline text           |
 | `#~_*('...')`  | underline bold text with the reset color |
 
-```
+```bash
 $ glit "#r*('hello world')"
 $ glit "#g*(b)"
 $ glit "#[255,175,52]('orange text')"
@@ -295,7 +294,7 @@ $ glit "#G('green background')"
 
 `glit` can understand and respects complicated nested styles, providing maximum flexibility.
 
-```
+```bash
 $ glit "#g('green text with some '#*('bold')' green text')"
 $ glit "#g*(b(#~('on branch ')))"
 ```
