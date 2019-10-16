@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { PushD } from './pane'
+import { PushD } from './pushd'
 
 import style from './footer.module.scss'
 

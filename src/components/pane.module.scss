@@ -42,6 +42,25 @@ $text-element-color: $dark-gray;
 
     h4, h5, h6 {
         text-transform: capitalize;
+    }
+
+    h4 {
+        color: $dark-blue;
+
+        &::selection {
+            color: $dark-blue;
+        }
+    }
+
+    h5 {
+        color: $dark-green;
+
+        &::selection {
+            color: $dark-green;
+        }
+    }
+
+    h6 {
         color: $dark-blue;
 
         &::selection {
@@ -278,41 +297,6 @@ a.box {
 .excerpt {
     display: block;
     padding-top: 1em;
-}
-
-.pushd {
-    display: flex;
-    flex-wrap: no-wrap;
-    overflow-x: hidden;
-    justify-content: flex-end;
-    white-space: pre;
-    flex-direction: row;
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-
-    a {
-        white-space: pre;
-        display: block;
-        margin: 0 1em;
-        &:first-child {
-            margin-left: 0;
-        }
-
-        &last-child {
-            margin-right: 0;
-        }
-    }
-
-    .pushd-current {
-        white-space: pre;
-        display: block;
-        font-weight: bold;
-        color: $dark-bright-aqua;
-        align-self: flex-start;
-        order: -1;
-        margin-right: auto;
-    }
 }
 
 $column-size: 1em;

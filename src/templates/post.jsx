@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import SEO from '../components/seo'
 import { graphql, Link } from 'gatsby'
-import Pane, { Box, LineBox, Title, PushD, PushDContext } from '../components/pane'
+import Pane, { Box, LineBox, Title } from '../components/pane'
+import { PushD, PushDContext } from '../components/pushd'
 import { Progress } from '../components/text-ui/progress'
 import ResizeProvider from '../resize'
 
@@ -74,7 +75,7 @@ function useScrollProgress() {
     }
     window.addEventListener('scroll', onChange)
     return () => window.removeEventListener('scroll', onChange)
-  }, [height, scrollHeight, contentHeight])
+  }, [height, scrollHeight, contentHeight, timer])
 
   return progress
 }

@@ -1,0 +1,37 @@
+@import '../colors';
+@import '../constants';
+
+.pushd {
+    display: flex;
+    flex-wrap: no-wrap;
+    overflow-x: hidden;
+    justify-content: flex-end;
+    white-space: pre;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+    a {
+        white-space: pre;
+        display: block;
+        margin: 0 1em;
+        &:first-child {
+            margin-left: 0;
+        }
+
+        &last-child {
+            margin-right: 0;
+        }
+    }
+
+    .pushd-current {
+        white-space: pre;
+        display: block;
+        font-weight: bold;
+        color: $dark-bright-aqua;
+        align-self: flex-start;
+        order: -1;
+        margin-right: auto;
+    }
+}

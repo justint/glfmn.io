@@ -1,6 +1,7 @@
 import React, { useContext, useRef } from 'react'
 import Layout from '../components/layout'
-import Pane, { LinkBox, Title, PushDContext } from '../components/pane'
+import Pane, { LinkBox, Title } from '../components/pane'
+import { PushDContext } from '../components/pushd'
 import SEO from '../components/seo'
 import ResizeProvider from '../resize'
 
