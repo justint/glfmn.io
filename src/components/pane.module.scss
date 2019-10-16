@@ -35,41 +35,27 @@ $text-element-color: $dark-gray;
         }
     }
 
-    h3, h3::selection {
-        text-transform: uppercase;
-        color: $dark-purple;
-    }
-
-    h4, h5, h6 {
+    h5, h6 {
+        font-weight: normal;
         text-transform: capitalize;
     }
 
-    h4 {
-        color: $dark-blue;
-
-        &::selection {
-            color: $dark-blue;
-        }
-    }
-
-    h5 {
+    h3, h3::selection {
+        text-transform: uppercase;
         color: $dark-green;
-
-        &::selection {
-            color: $dark-green;
-        }
     }
 
-    h6 {
+    h4, h4::selection {
+        text-transform: capitalize;
+        color: $dark-aqua;
+    }
+
+    h5, h5::selection {
         color: $dark-blue;
-
-        &::selection {
-            color: $dark-blue;
-        }
     }
 
-    h5, h6 {
-        font-weight: normal;
+    h6, h6::selection {
+        color: $dark-purple;
     }
 
     h3::before {
