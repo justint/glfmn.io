@@ -24,17 +24,17 @@ Go to the [release](https://github.com/glfmn/glitter/releases) page and download
 To make sure Glitter is installed:
 
 ```bash
-$ glit "'hello from git'" -e "'hello'"
+glit "'hello from git'" -e "'hello'"
 ```
 
 It will output `hello from git` if the current directory is in a git repository and `hello` if it is not.
 
-##### Build from source
+#### Build from source
 
-Install the [rust toolchain](https://rustup.rs), `cmake` and `openssl` first, and then:
+If a download for you platform does not exist, install the [rust toolchain](https://rustup.rs), `cmake` and `openssl` first, and then:
 
-```term
-$ cargo install glit
+```bash
+cargo install glit
 ```
 
 #### Setting up your shell
@@ -180,7 +180,7 @@ Glitter will surround grouped expressions with parentheses or brackets, and will
 | `[MAR]`   | `[M1A3]` where `R` is 0         |
 | `[r\(a)]` | empty, when `r`, `a` are 0      |
 
-```
+```bash
 $ glit "b<M>"
 ```
 
