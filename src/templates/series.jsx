@@ -13,7 +13,7 @@ export default function Template(
         <p>{description}</p>
         <Items items={pages} />
         <pre>{JSON.stringify(rest, null, 2)}</pre>
-    </div >)
+    </div>)
 }
 
 const Items = ({ items }) => (<ul>
