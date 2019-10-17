@@ -9,14 +9,15 @@ import style from './series.module.scss'
 export default function Template(
   { data: { series, allMarkdownRemark } }
 ) {
-  const { name, description } = series
+  const { name, description, color } = series
+  console.log('series: ', series)
   const pages = allMarkdownRemark.group[0].nodes
   return (<div className={style.page}>
     <SEO description={description} title={name} />
     <Pane className={style.posts}>
       <div className={style.postTitleContainer}>
         <Box className={style.postTitle}>
-          <Label color='green'>{name}</Label>
+          <Label color={color}>{name}</Label>
           <br />
           <p>{description}</p>
         </Box>
@@ -70,5 +71,6 @@ query groupSeries($series: String!) {
   series(name: {eq: $series}) {
     description
     name
+    color
   }
 }`
