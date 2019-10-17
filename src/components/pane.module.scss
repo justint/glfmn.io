@@ -2,26 +2,28 @@
 @import '../constants';
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:400,400i,700&display=swap');
 
-$box-color: $dark-bg2;
+$box-color: var(--bg2);
 $box-border: 1px solid $box-color;
-$link-color: $dark-yellow;
-$text-element-color: $dark-gray;
+$link-color: var(--yellow);
+$text-element-color: var(--gray);
 
 .pane-container {
     position: relative;
     box-sizing: border-box;
+
+    @extend %dark-colors;
+    *::selection {
+        @extend %light-colors;
+        color: var(--fg1);
+        background-color: var(--bg0);
+    }
 }
 
 .terminal-theme {
     font-size: 1rem;
     font-family: 'Source Code Pro', monospace;
-    color: $dark-fg0;
-    background-color: $dark-bg;
-
-    *::selection {
-        color: $light-fg0;
-        background-color: $light-bg2;
-    }
+    color: var(--fg1);
+    background-color: var(--bg);
 
     h1, h2, h3, h4, h5, h6 {
         font-weight: bold;
@@ -42,20 +44,20 @@ $text-element-color: $dark-gray;
 
     h3, h3::selection {
         text-transform: uppercase;
-        color: $dark-green;
+        color: var(--green);
     }
 
     h4, h4::selection {
         text-transform: capitalize;
-        color: $dark-aqua;
+        color: var(--aqua);
     }
 
     h5, h5::selection {
-        color: $dark-blue;
+        color: var(--blue);
     }
 
     h6, h6::selection {
-        color: $dark-purple;
+        color: var(--purple);
     }
 
     h3::before {
@@ -76,12 +78,12 @@ $text-element-color: $dark-gray;
 
     em::before, em::after {
         content: '_';
-        color: $dark-gray;
+        color: var(--gray);
     }
 
     strong::before, strong::after {
         content: '*';
-        color: $dark-gray;
+        color: var(--gray);
     }
 
     p {
@@ -94,8 +96,9 @@ $text-element-color: $dark-gray;
 
     a {
         &::selection {
-            color: $light-yellow;
-            background-color: $light-bg1;
+            @extend %light-colors;
+            background-color: var(--yellow);
+            color: var(--fg1);
         }
 
         color: $link-color;
@@ -104,8 +107,9 @@ $text-element-color: $dark-gray;
         text-decoration: none;
 
         &:hover, &:focus {
+
             background-color: $link-color;
-            color: $dark-bg0;
+            color: var(--bg0);
         }
     }
 
@@ -120,7 +124,7 @@ $text-element-color: $dark-gray;
             content: counter(ol)'.';
 	          counter-increment: ol;
 
-            color: $dark-gray;
+            color: var(--gray);
             display: inline-block;
             width: 2.4em;
             text-align: right;
@@ -149,7 +153,7 @@ $text-element-color: $dark-gray;
     }
 
     blockquote {
-        color: $dark-fg2;
+        color: var(--fg2);
         font-style: italic;
         margin: 1em 0;
         padding: 0;
@@ -157,19 +161,19 @@ $text-element-color: $dark-gray;
 
     :not(pre) > code {
         font-style: normal;
-        color: $dark-fg1;
-        background-color: $dark-bg0_s;
+        color: var(--fg1);
+        background-color: var(--bg0_s);
 
         &::before, &::after {
-            color: $dark-gray;
+            color: var(--gray);
             content: '`';
         }
     }
 
     pre {
         font-size: 1em;
-        color: $dark-fg;
-        background-color: $dark-bg0_s;
+        color: var(--fg);
+        background-color: var(--bg0-s);
         padding: 1em 0;
         overflow-x: scroll;
     }
@@ -198,7 +202,7 @@ $text-element-color: $dark-gray;
 }
 
 .path {
-    color: $dark-bright-aqua;
+    color: var(--bright-aqua);
     font-weight: 700;
     font-size: 1rem;
     font-family: 'Source Code Pro', monospace;
@@ -215,18 +219,18 @@ $text-element-color: $dark-gray;
     display: inline-block;
     margin: 4em auto;
     padding: 2em;
-    background-color: $dark-bg0;
+    background-color: var(--bg0);
     border: $box-border;
     text-align: left;
 
     &:hover, &:focus {
-        border-color: $dark-fg1;
+        border-color: var(--fg1);
         .link-box-link-text  {
-            color: $dark-bg0;
-            background-color: $dark-yellow;
+            color: var(--bg0);
+            background-color: var(--yellow);
 
             &::after {
-                color: $dark-yellow;
+                color: var(--yellow);
             }
         }
     }
@@ -238,7 +242,7 @@ a.box {
 
     &:hover, &:focus {
         color: inherit;
-        background-color: $dark-bg0;
+        background-color: var(--bg0);
     }
 }
 
@@ -248,9 +252,9 @@ a.box {
 
     position: relative;
 
-    border-bottom: 1px dashed $dark-yellow;
+    border-bottom: 1px dashed var(--yellow);
 
-    color: $dark-yellow;
+    color: var(--yellow);
 
     &::after {
         content: '->';
@@ -274,7 +278,7 @@ a.box {
 
     &::before {
         content: 'title: ';
-        color: $dark-bright-green;
+        color: var(--bright-green);
     }
 }
 
@@ -287,7 +291,7 @@ a.box {
 
     &::before {
         content: 'author: ';
-        color: $dark-blue;
+        color: var(--blue);
     }
 }
 
@@ -298,7 +302,7 @@ a.box {
 
     &::before {
         content: 'date: ';
-        color: $dark-purple;
+        color: var(--purple);
     }
 }
 
@@ -333,7 +337,7 @@ $gutter-offset: 5em;
 
 .footer {
     z-index: 3;
-    background-color: $dark-bg1;
+    background-color: var(--bg1);
     position: sticky;
     left: 0;
     right: 0;
@@ -385,7 +389,7 @@ $gutter-offset: 5em;
             }
             &::before {
                 content: '>';
-                color: $dark-fg3;
+                color: var(--fg3);
                 font-weight: bold;
                 position: absolute;
                 left: 0;
@@ -415,7 +419,7 @@ $gutter-offset: 5em;
                 text-align: right;
             }
             &:hover::after {
-                color: $dark-fg0;
+                color: var(--fg0);
             }
         }
     }

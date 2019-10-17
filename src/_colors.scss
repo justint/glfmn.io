@@ -51,6 +51,38 @@ $dark-bright-orange: #FE8019;
 $dark-gray: $gray;
 $dark-bright-gray: #928374;
 
+%dark-colors {
+    --bg: #{$dark-bg};
+    --bg0: #{$dark-bg0};
+    --bg0-h: #{$dark-bg0_h};
+    --bg0-s: #{$dark-bg0_s};
+    --bg1: #{$dark-bg1};
+    --bg2: #{$dark-bg2};
+    --bg3: #{$dark-bg3};
+    --bg4: #{$dark-bg4};
+    --fg0: #{$dark-fg0};
+    --fg1: #{$dark-fg1};
+    --fg2: #{$dark-fg2};
+    --fg3: #{$dark-fg3};
+    --fg4: #{$dark-fg4};
+    --bright-purple: #{$dark-bright-purple};
+    --bright-green: #{$dark-bright-green};
+    --bright-red: #{$dark-bright-red};
+    --bright-blue: #{$dark-bright-blue};
+    --bright-aqua: #{$dark-bright-aqua};
+    --bright-yellow: #{$dark-bright-yellow};
+    --bright-orange: #{$dark-bright-orange};
+    --bright-gray: #{$dark-bright-gray};
+    --purple: #{$dark-purple};
+    --green: #{$dark-green};
+    --red: #{$dark-red};
+    --blue: #{$dark-blue};
+    --aqua: #{$dark-aqua};
+    --yellow: #{$dark-yellow};
+    --orange: #{$dark-orange};
+    --gray: #{$dark-gray};
+}
+
 /// Light mode colors
 
 /// Background (white and light gray) colors
@@ -88,3 +120,35 @@ $light-gray: #7C6F64;
 $light-bright-gray: $gray;
 $light-orange: $orange;
 $light-bright-orange: #AF3A03;
+
+/// Set the colors as CSS variables
+%light-colors {
+    --bg0: #{$light-bg0};
+    --bg0-h: #{$light-bg0_h};
+    --bg0-s: #{$light-bg0_s};
+    --bg1: #{$light-bg1};
+    --bg2: #{$light-bg2};
+    --bg3: #{$light-bg3};
+    --bg4: #{$light-bg4};
+    --fg0: #{$light-fg0};
+    --fg1: #{$light-fg1};
+    --fg2: #{$light-fg2};
+    --fg3: #{$light-fg3};
+    --fg4: #{$light-fg4};
+    --bright-purple: #{$light-bright-purple};
+    --bright-green: #{$light-bright-green};
+    --bright-red: #{$light-bright-red};
+    --bright-blue: #{$light-bright-blue};
+    --bright-aqua: #{$light-bright-aqua};
+    --bright-yellow: #{$light-bright-yellow};
+    --bright-orange: #{$light-bright-orange};
+    --bright-gray: #{$light-bright-gray};
+    --purple: #{$light-purple};
+    --green: #{$light-green};
+    --red: #{$light-red};
+    --blue: #{$light-blue};
+    --aqua: #{$light-aqua};
+    --yellow: #{$light-yellow};
+    --orange: #{$light-orange};
+    --gray: #{$light-gray};
+}
