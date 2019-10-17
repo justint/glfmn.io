@@ -4,6 +4,7 @@ title: 'Pathfinding: beyond A*'
 author: 'glfmn'
 date: '2019-10-04'
 summary: "Video games tend to use A* for pathfinding, and for good reason, but there are things it can't do."
+series: 'SBMPO'
 draft: true
 ---
 

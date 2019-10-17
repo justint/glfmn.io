@@ -17,17 +17,40 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           }
         }
       }
-    }
-  `)
-    if (result.errors) {
-        reporter.panicOnBuild(`Error while running GraphQL query.`)
-        return
-    }
-    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-        createPage({
-            path: node.frontmatter.path,
-            component: postTemplate,
-            context: {}, // additional data can be passed via context
-        })
+    }`)
+  if (result.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`)
+    return
+  }
+  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    createPage({
+        path: node.frontmatter.path,
+        component: postTemplate,
+        context: {},
     })
+  })
+
+  const seriesTemplate = path.resolve(`src/templates/series.jsx`)
+  const series = await graphql(`{
+    allMarkdownRemark(
+      sort: {fields: frontmatter___date, order: DESC}
+    ) {
+      group(field: frontmatter___series) {
+        fieldValue
+      }
+    }
+  }`)
+  if (series.errors) {
+    reporter.panicOnBuild(`Error while querying for series`)
+    return
+  }
+  series.data.allMarkdownRemark.group.forEach(async ({fieldValue}) => {
+    createPage({
+      path: `/s/${fieldValue}`,
+      component: seriesTemplate,
+      context: {
+        series: fieldValue,
+      }
+    })
+  })
 }
