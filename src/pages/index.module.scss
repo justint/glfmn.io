@@ -1,18 +1,14 @@
+
 @import '../colors';
 @import '../constants';
 
 .post-container {
-    @media screen and (min-width: $mobile-size) {
-        padding: 1em;
-        margin: 1em auto;
-    }
-
     * {
         position: relative;
         z-index: 1;
     }
 
-    margin: 1em 0;
+    padding: 1em 0;
     max-width: 800px;
     max-width: calc(800px + 20%);
     position: relative;

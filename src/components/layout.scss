@@ -1,10 +1,13 @@
+
 @import '../_colors';
 @import '../_constants';
 @import url('https://fonts.googleapis.com/css?Ubuntu:400,400i,700,700i&display=swap');
 
 html {
-  color: $light-fg;
-  background-color: $light-bg;
+  @extend %light-colors;
+
+  color: var(--fg);
+  background-color: var(--bg);
   font-family: 'Source Code Pro', monospace;
   text-size-adjust: 100%;
 
@@ -43,7 +46,7 @@ body {
 }
 
 .page-content {
-    padding-bottom: 6em;
+    padding-bottom: 4em;
 }
 
 .page-footer {

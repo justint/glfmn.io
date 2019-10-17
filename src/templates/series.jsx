@@ -1,26 +1,51 @@
 import React from 'react'
+import Footer from '../components/footer'
+import Pane, { Box, LinkBox, Title } from '../components/pane'
 import SEO from '../components/seo'
 import { Link } from 'gatsby'
 
+import style from './series.module.scss'
+
 export default function Template(
-    { data: { series, allMarkdownRemark } }
+  { data: { series, allMarkdownRemark } }
 ) {
-    const { name, description, ...rest } = series
-    const pages = allMarkdownRemark.group[0].nodes
-    return (<div>
-        <SEO description={description} title={name} />
-        <h1>{name}</h1>
-        <p>{description}</p>
-        <Items items={pages} />
-        <pre>{JSON.stringify(rest, null, 2)}</pre>
-    </div>)
+  const { name, description } = series
+  const pages = allMarkdownRemark.group[0].nodes
+  return (<div className={style.page}>
+    <SEO description={description} title={name} />
+    <Pane className={style.posts}>
+      <div className={style.postTitleContainer}>
+        <Box className={style.postTitle}>
+          <Label color='green'>{name}</Label>
+          <br />
+          <p>{description}</p>
+        </Box>
+      </div>
+      <Items items={pages} />
+    </Pane>
+    <Footer className={style.footer}>
+      <Link to='/'>/home/glfmn</Link>
+    </Footer>
+  </div >)
 }
 
-const Items = ({ items }) => (<ul>
-    {items.map(({ id, frontmatter }) => <Item key={id} {...frontmatter} />)}
+const Label = ({ color, children }) => (
+  <header className={style.seriesTitle + ' ' + style[color]}>{children}</header>
+)
+
+const Items = ({ items }) => (<ul style={{ listStyleType: 'none' }}>
+  {items.map(({ id, frontmatter }) => <Item key={id} {...frontmatter} />)}
 </ul>)
 
-const Item = ({ path }) => (<Link to={path}><li>{path}</li></Link>)
+const Item = ({ path, title, author, date, summary }) => (
+  <li className={style.postTitleContainer}>
+    <LinkBox className={style.postTitle} to={path} linkText={`open ${path}.md`}>
+      <Title author={author} date={date} excerpt={summary}>
+        {title}
+      </Title>
+    </LinkBox>
+  </li>
+)
 
 export const pageQuery = graphql`
 query groupSeries($series: String!) {
@@ -31,6 +56,7 @@ query groupSeries($series: String!) {
     group(field: frontmatter___series) {
       nodes {
         frontmatter {
+          title
           author
           date
           path

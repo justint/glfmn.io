@@ -19,12 +19,14 @@ export default function IndexPage({ data }) {
   return (
     <Layout>
       <SEO title="Home" />
-      {posts
-        .filter(post => post.node.frontmatter.title.length > 0)
-        .map(({ node: { id, frontmatter } }) => (
-          <Preview key={id} onClick={onClick} {...frontmatter} />
-        ))
-      }
+      <Pane style={{ textAlign: 'center', position: 'relative' }}>
+        {posts
+          .filter(post => post.node.frontmatter.title.length > 0)
+          .map(({ node: { id, frontmatter } }) => (
+            <Preview key={id} onClick={onClick} {...frontmatter} />
+          ))
+        }
+      </Pane>
     </Layout>
   )
 }
@@ -33,27 +35,22 @@ function Preview({ path, onClick, title, author, date, summary, Bg }) {
   const container = useRef(null)
   return (
     <div className={style.postContainer}>
-      <Pane foot={<span className={style.pagePath}>{path}.md</span>}>
-        <div style={{ textAlign: 'center', position: 'relative' }}>
-          <div ref={container} className={style.postBackground}>
-            { Bg && <ResizeProvider track={container}><Bg/></ResizeProvider> }
-          </div>
-          <LinkBox
-            linkText={`open ${path}.md`}
-            to={path} tabIndex='0'
-            onClick={onClick(path)}
-            className={style.postTitle}>
-            <Title
-              excerpt={summary}
-              author={author}
-              date={date}
-            >
-              {title}
-            </Title>
-          </LinkBox>
-
-        </div>
-      </Pane>
+      <div ref={container} className={style.postBackground}>
+        {Bg && <ResizeProvider track={container}><Bg /></ResizeProvider>}
+      </div>
+      <LinkBox
+        linkText={`open ${path}.md`}
+        to={path} tabIndex='0'
+        onClick={onClick(path)}
+        className={style.postTitle}>
+        <Title
+          excerpt={summary}
+          author={author}
+          date={date}
+        >
+          {title}
+        </Title>
+      </LinkBox>
     </div>
   )
 }

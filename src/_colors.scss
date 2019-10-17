@@ -123,6 +123,7 @@ $light-bright-orange: #AF3A03;
 
 /// Set the colors as CSS variables
 %light-colors {
+    --bg: #{$light-bg};
     --bg0: #{$light-bg0};
     --bg0-h: #{$light-bg0_h};
     --bg0-s: #{$light-bg0_s};
@@ -130,6 +131,7 @@ $light-bright-orange: #AF3A03;
     --bg2: #{$light-bg2};
     --bg3: #{$light-bg3};
     --bg4: #{$light-bg4};
+    --fg: #{$light-fg};
     --fg0: #{$light-fg0};
     --fg1: #{$light-fg1};
     --fg2: #{$light-fg2};
