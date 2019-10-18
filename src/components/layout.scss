@@ -1,15 +1,13 @@
-
 @import '../_colors';
 @import '../_constants';
-@import url('https://fonts.googleapis.com/css?Ubuntu:400,400i,700,700i&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:400,400i,700&display=swap');
 
 html {
   @extend %light-colors;
 
   color: var(--fg);
   background-color: var(--bg);
-  font-family: 'So
-  urce Code Pro', monospace;
+  font-family: 'Source Code Pro', monospace;
   text-size-adjust: 100%;
 
   font-size: 14px;
@@ -53,10 +51,6 @@ body {
     right: 0;
     display: block;
     z-index: 1;
-}
-
-.page-content {
-    padding-bottom: 4em;
 }
 
 .page-footer {

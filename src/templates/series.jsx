@@ -1,9 +1,9 @@
 import React from 'react'
-import { Box, Preview } from '../components/pane'
+import { Box } from '../components/pane'
+import Preview, { Label } from '../components/preview'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import { graphql } from 'gatsby'
-import classNames from 'classnames'
 
 import styles from './series.module.scss'
 
@@ -16,7 +16,7 @@ export default function Template(
     <SEO description={description} title={name} />
     <Layout>
       <Box className={styles.postTitle}>
-        <Label color={color}>{name}</Label>
+        <Label className={styles.label} color={color}>{name}</Label>
         <br />
         <p>{description}</p>
       </Box>
@@ -24,14 +24,6 @@ export default function Template(
     </Layout>
   </div>)
 }
-
-
-const Label = ({ color, children, hover }) => (
-  <header
-    className={classNames(styles.seriesTitle, styles[color], hover && styles.hover)}>
-    {children}
-  </header>
-)
 
 const Item = (props) => (
   <Preview className={styles.postTitle} {...props} />

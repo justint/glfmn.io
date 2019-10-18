@@ -1,6 +1,5 @@
 @import '../colors';
 @import '../constants';
-@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:400,400i,700&display=swap');
 
 $box-color: var(--bg2);
 $box-border: 1px solid $box-color;
@@ -21,22 +20,6 @@ $text-element-color: var(--gray);
     }
 }
 
-.background {
-    text-align: left;
-    z-index: 0 !important;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    color: var(--gray);
-}
-
-.preview {
-    display: inline-block;
-    position: relative;
-}
-
 .terminal-theme {
     font-size: 1rem;
     font-family: 'Source Code Pro', monospace;
@@ -47,14 +30,11 @@ $text-element-color: var(--gray);
         font-weight: bold;
         margin: 1em 0;
         margin-top: 2em;
-        font-size: 1.2em;
+        font-size: 1em;
         line-height: normal;
 
         &:first-child {
             margin-top: 0;
-        }
-        &::after {
-            font-size: 1rem;
         }
     }
 
@@ -237,7 +217,9 @@ $text-element-color: var(--gray);
 
 
 .box {
-    display: inline-block;
+    position: relative;
+    display: block;
+    width: 100%;
     margin: 4em auto;
     padding: 2em;
     background-color: var(--bg0);
@@ -283,55 +265,6 @@ a.box {
         position: absolute;
         right: -2em;
     }
-}
-
-.title-container {
-    display: inline-block;
-    min-width: 33%;
-    max-width: 66%;
-    max-width: minmax(66%, 20em);
-    padding: 2em;
-}
-
-.title {
-    padding: 0;
-    margin: 0 !important;
-    font-weight: 700;
-    font-size: 1em !important;
-
-    &::before {
-        content: 'title: ';
-        color: var(--bright-green);
-    }
-}
-
-.author {
-    padding: 0;
-    margin: 0;
-    display: block;
-
-    font-weight: 400;
-
-    &::before {
-        content: 'author: ';
-        color: var(--blue);
-    }
-}
-
-.date {
-    padding: 0;
-    margin: 0;
-    display: block;
-
-    &::before {
-        content: 'date: ';
-        color: var(--purple);
-    }
-}
-
-.excerpt {
-    display: block;
-    padding-top: 1em;
 }
 
 $column-size: 1em;

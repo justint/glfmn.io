@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
-import { Preview } from '../components/pane'
+import Preview, { Label } from '../components/preview'
 import { PushDContext } from '../components/pushd'
 import SEO from '../components/seo'
 import Header from '../components/header'
@@ -17,28 +17,37 @@ export default function IndexPage({ data }) {
   }
 
   const { site: { siteMetadata } } = data
+  const colors = data.allSeries.nodes.reduce(
+    (a, { name, color }) => {
+      a[name] = color
+      return a
+    },
+    {}
+  )
 
   return (<>
     <SEO title="Home" />
     <Layout header={<Header siteTitle={siteMetadata.title} />}>
       {posts
         .filter(({ node: { frontmatter: { title } } }) => title.length > 0)
-        .map(({ node: { id, frontmatter } }) => (
-          <Item key={id} onClick={onClick} {...frontmatter} />
+        .map(({ node: { id, frontmatter: f } }) => (
+          <Item key={id} color={colors[f.series]} onClick={onClick} {...f} />
         ))
       }
     </Layout>
   </>)
 }
 
-function Item({ onClick, path, ...props }) {
+function Item({ onClick, allSeries, series, color, path, ...props }) {
+  console.log(series, color)
   return (
     <Preview
       path={path} to={path}
       tabIndex='0'
       onClick={onClick(path)}
-      className={style.postTitle}
-      {...props} />
+      {...props}>
+      {series && <Label className={style.label} color={color}>{series}</Label>}
+    </Preview>
   )
 }
 
@@ -53,8 +62,15 @@ export const pageQuery = graphql`query IndexQuery {
           date(formatString: "YYYY-MM-DD")
           path
           summary
+          series
         }
       }
+    }
+  }
+  allSeries {
+    nodes {
+      name
+      color
     }
   }
   site {

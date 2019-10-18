@@ -3,5 +3,10 @@
     Sampling based, model-predictive optimization is a technique for solving
     optimization problems combining graph search with practices from the field
     of controls.
-  color: 'yellow'
+  color: 'purple'
   Bg: null
+- name: Glitter
+  description:
+    Glitter is a tool for designing custom shell prompts with embedded git
+    information.
+  color: 'aqua'

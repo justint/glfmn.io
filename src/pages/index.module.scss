@@ -1,9 +1,9 @@
 @import '../colors';
 @import '../constants';
 
-.post-title {
-    position: relative;
-    min-width: 15em;
-    width: 60%;
-    max-width: 750px;
+.label {
+    position: absolute;
+    // top: -1.5em;
+    top: -1px;
+    right: -1px;
 }

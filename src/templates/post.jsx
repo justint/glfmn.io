@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import SEO from '../components/seo'
 import { graphql, Link } from 'gatsby'
-import Pane, { Box, LineBox, Title } from '../components/pane'
+import Pane, { Box, LineBox } from '../components/pane'
+import { Title } from '../components/preview'
 import { PushD, PushDContext } from '../components/pushd'
 import { Progress } from '../components/text-ui/progress'
 import ResizeProvider from '../resize'
@@ -13,7 +14,7 @@ export default function Template({ data }) {
   const { frontmatter, html } = markdownRemark
   const { author, title, date, path, summary } = frontmatter
 
-  const {cd} = useContext(PushDContext)
+  const { cd } = useContext(PushDContext)
   const onClick = (from, to) => () => cd(to, from)
 
   // Set the element we will track for resizing
@@ -24,18 +25,18 @@ export default function Template({ data }) {
 
   return (
     <div className="blog-post-container">
-      <SEO title={title} description={summary}/>
+      <SEO title={title} description={summary} />
       <ResizeProvider track={resize}>
         <Pane ref={resize} foot={
           <React.Fragment>
-            <Progress label='read' progress={Math.max(0, progress)} width={400}/>
-            <PushD current={path}/>
+            <Progress label='read' progress={Math.max(0, progress)} width={400} />
+            <PushD current={path} />
           </React.Fragment>
         }>
           <LineBox className={style.postContainer} heading={
             <Title author={author} date={date}>{title}</Title>
           }>
-            { frontmatter.draft && <DraftNotice/> }
+            {frontmatter.draft && <DraftNotice />}
             <article
               className={style.postContent}
               dangerouslySetInnerHTML={{ __html: html }}
@@ -51,9 +52,9 @@ export default function Template({ data }) {
 }
 
 const DraftNotice = () => (
-    <Box style={{ margin: '2em', marginLeft: '2em', paddingLeft: '1em' }}>
-        <strong>This is a draft article; it is available for proofreading and testing.</strong>
-    </Box>
+  <Box style={{ margin: '2em', marginLeft: '2em', paddingLeft: '1em' }}>
+    <strong>This is a draft article; it is available for proofreading and testing.</strong>
+  </Box>
 )
 
 function useScrollProgress() {
@@ -69,7 +70,7 @@ function useScrollProgress() {
         if (height < 2) {
           setProgress(1)
         } else {
-          setProgress(window.pageYOffset/height)
+          setProgress(window.pageYOffset / height)
         }
       }, 25))
     }
@@ -87,8 +88,8 @@ function pageHeight() {
   const contentHeight = window.innerHeight
     || document.documentElement.clientHeight
     || document.body.clientHeight
-  const scrollHeight =  document.body.scrollHeight
-  const height = scrollHeight > 0? scrollHeight - contentHeight : contentHeight
+  const scrollHeight = document.body.scrollHeight
+  const height = scrollHeight > 0 ? scrollHeight - contentHeight : contentHeight
   return [height, scrollHeight, contentHeight]
 }
 
