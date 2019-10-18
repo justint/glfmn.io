@@ -2,12 +2,13 @@
 @import '../constants';
 
 .preview {
-    display: inline-block;
+    display: block;
+    width: 100%;
     position: relative;
 }
 
 .list-item {
-    display: inline-block;
+    
 }
 
 .label {
