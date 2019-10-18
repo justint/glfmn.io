@@ -1,8 +1,7 @@
 @import '../colors';
 
 .container {
-    @extend %light-colors;
-    background-color: var(--bg2);
+    @extend %dark-colors;
 }
 
 .title {
@@ -10,4 +9,8 @@
     font-family: 'Source Code Pro', monospace;
     font-size: 2em;
     font-weight: normal;
+    color: var(--bg0);
+    background-color: var(--fg2);
+    padding: 0 0.44em;
 }
+
