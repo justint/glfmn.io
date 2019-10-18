@@ -320,6 +320,7 @@ $gutter-offset: 5em;
         border-right: $box-border;
     }
 
+    padding: $column-size-2 1em;
     padding-bottom: 2em;
 
     @media screen and (min-width: $mobile-size) {
