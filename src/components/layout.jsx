@@ -1,39 +1,33 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Link, useStaticQuery, graphql } from "gatsby"
+import { Link } from "gatsby"
+import { ListPane } from './pane'
 
-import Header from './header'
 import Footer from './footer'
 
 import './layout.scss'
 
-const Layout = ({ children }) => {
-    const data = useStaticQuery(graphql`
-        query SiteTitleQuery {
-            site {
-                siteMetadata {
-                    title
-                }
-            }
-        }
-    `)
-
-    const { title } = data.site.siteMetadata
-
-    return (
-        <div className='page-container'>
-            <Header className='page-header' siteTitle={title} />
-            <main className='page-content'>{children}</main>
-            <Footer className='page-footer'>
-                <Link to='/'>/home/glfmn</Link>
-                <a href='https://GitHub.com/glfmn'>GitHub://glfmn/</a>
-            </Footer>
-        </div>
-    )
+const Layout = ({ header, children }) => {
+  const listStyle = { textAlign: 'center', position: 'relative' }
+  const itemStyle = { height: '100vh' }
+  return (
+    <div className='page-container'>
+      <header className='page-header'>{header}</header>
+      <main className='page-content'>
+        <ListPane style={listStyle} itemStyle={itemStyle}>
+          {children}
+        </ListPane>
+      </main>
+      <Footer className='page-footer'>
+        <Link to='/'>/home/glfmn</Link>
+        <a href='https://GitHub.com/glfmn'>GitHub://glfmn/</a>
+      </Footer>
+    </div >
+  )
 }
 
 Layout.propTypes = {
-    children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
 }
 
 export default Layout

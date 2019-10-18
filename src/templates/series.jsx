@@ -1,51 +1,40 @@
 import React from 'react'
-import Footer from '../components/footer'
-import Pane, { Box, LinkBox, Title } from '../components/pane'
+import { Box, Preview } from '../components/pane'
+import Layout from '../components/layout'
 import SEO from '../components/seo'
-import { Link } from 'gatsby'
+import { graphql } from 'gatsby'
+import classNames from 'classnames'
 
-import style from './series.module.scss'
+import styles from './series.module.scss'
 
 export default function Template(
   { data: { series, allMarkdownRemark } }
 ) {
   const { name, description, color } = series
-  console.log('series: ', series)
   const pages = allMarkdownRemark.group[0].nodes
-  return (<div className={style.page}>
+  return (<div className={styles.page}>
     <SEO description={description} title={name} />
-    <Pane className={style.posts}>
-      <div className={style.postTitleContainer}>
-        <Box className={style.postTitle}>
-          <Label color={color}>{name}</Label>
-          <br />
-          <p>{description}</p>
-        </Box>
-      </div>
-      <Items items={pages} />
-    </Pane>
-    <Footer className={style.footer}>
-      <Link to='/'>/home/glfmn</Link>
-    </Footer>
-  </div >)
+    <Layout>
+      <Box className={styles.postTitle}>
+        <Label color={color}>{name}</Label>
+        <br />
+        <p>{description}</p>
+      </Box>
+      {pages.map(({ id, frontmatter }) => <Item key={id} {...frontmatter} />)}
+    </Layout>
+  </div>)
 }
 
-const Label = ({ color, children }) => (
-  <header className={style.seriesTitle + ' ' + style[color]}>{children}</header>
+
+const Label = ({ color, children, hover }) => (
+  <header
+    className={classNames(styles.seriesTitle, styles[color], hover && styles.hover)}>
+    {children}
+  </header>
 )
 
-const Items = ({ items }) => (<ul style={{ listStyleType: 'none' }}>
-  {items.map(({ id, frontmatter }) => <Item key={id} {...frontmatter} />)}
-</ul>)
-
-const Item = ({ path, title, author, date, summary }) => (
-  <li className={style.postTitleContainer}>
-    <LinkBox className={style.postTitle} to={path} linkText={`open ${path}.md`}>
-      <Title author={author} date={date} excerpt={summary}>
-        {title}
-      </Title>
-    </LinkBox>
-  </li>
+const Item = (props) => (
+  <Preview className={styles.postTitle} {...props} />
 )
 
 export const pageQuery = graphql`

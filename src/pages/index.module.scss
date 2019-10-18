@@ -1,50 +1,9 @@
-
 @import '../colors';
 @import '../constants';
 
-.post-container {
-    * {
-        position: relative;
-        z-index: 1;
-    }
-
-    padding: 1em 0;
-    max-width: 800px;
-    max-width: calc(800px + 20%);
-    position: relative;
-}
-
-.post-background {
-    text-align: left;
-    z-index: 0 !important;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    color: $dark-gray
-}
-
 .post-title {
+    position: relative;
     min-width: 15em;
     width: 60%;
     max-width: 750px;
-}
-
-a.page-path, .page-path {
-    color: $dark-bright-aqua;
-    font-weight: bold;
-}
-
-a.page-path:hover {
-    color: $light-fg1;
-
-    .command {
-        color: $light-fg2;
-    }
-}
-
-.command {
-    color: $dark-yellow;
-    font-weight: normal;
 }

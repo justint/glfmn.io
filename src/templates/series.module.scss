@@ -1,6 +1,4 @@
 .page {
-    display: grid;
-    grid-template-rows: 1fr auto;
     position: absolute;
     bottom: 0;
     top: 0;
@@ -35,23 +33,17 @@
     &.yellow { --series-color: var(--yellow); }
     &.orange { --series-color: var(--orange); }
     &.red { --series-color: var(--red); }
-}
-
-.post-title-container {
-    min-height: calc(100vh - 4em);
-    display: flex;
-    align-items: center;
+    &.hover:hover {
+        font-weight: bold;
+        background-color: var(--bg);
+        color: var(--series-color);
+    }
 }
 
 .post-title {
-    position: relative;
     display: inline-block;
+    position: relative;
     min-width: 15em;
     width: 60%;
     max-width: 750px;
-}
-
-.footer {
-    position: sticky;
-    bottom: 0;
 }

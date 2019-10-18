@@ -12,11 +12,29 @@ $text-element-color: var(--gray);
     box-sizing: border-box;
 
     @extend %dark-colors;
+    color: var(--fg1);
+    background-color: var(--bg0);
     *::selection {
         @extend %light-colors;
         color: var(--fg1);
         background-color: var(--bg0);
     }
+}
+
+.background {
+    text-align: left;
+    z-index: 0 !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: var(--gray);
+}
+
+.preview {
+    display: inline-block;
+    position: relative;
 }
 
 .terminal-theme {
@@ -242,6 +260,7 @@ $text-element-color: var(--gray);
 a.box {
     color: inherit;
     border-bottom: $box-border;
+    text-decoration: none;
 
     &:hover, &:focus {
         color: inherit;

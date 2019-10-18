@@ -7,13 +7,7 @@ import styles from "./header.module.scss"
 export default function Header({ className, siteTitle }) {
   return (
     <header className={classNames(className, styles.container)}>
-      <h1 className={styles.title}>
-        <span className={styles.user}>{siteTitle}</span>
-        <span>@</span>
-        <span className={styles.host}>blog</span>
-        <span className={styles.path}>~</span>
-        <span className={styles.prompt}>$</span>
-      </h1>
+      <h1 className={styles.title}>{siteTitle}</h1>
     </header>
   )
 }

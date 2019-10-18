@@ -1,10 +1,10 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext } from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
-import Pane, { LinkBox, Title } from '../components/pane'
+import { Preview } from '../components/pane'
 import { PushDContext } from '../components/pushd'
 import SEO from '../components/seo'
-import ResizeProvider from '../resize'
+import Header from '../components/header'
 
 import style from './index.module.scss'
 
@@ -16,60 +16,50 @@ export default function IndexPage({ data }) {
     cd(to, '/')
   }
 
-  return (
-    <Layout>
-      <SEO title="Home" />
-      <Pane style={{ textAlign: 'center', position: 'relative' }}>
-        {posts
-          .filter(post => post.node.frontmatter.title.length > 0)
-          .map(({ node: { id, frontmatter } }) => (
-            <Preview key={id} onClick={onClick} {...frontmatter} />
-          ))
-        }
-      </Pane>
+  const { site: { siteMetadata } } = data
+
+  return (<>
+    <SEO title="Home" />
+    <Layout header={<Header siteTitle={siteMetadata.title} />}>
+      {posts
+        .filter(({ node: { frontmatter: { title } } }) => title.length > 0)
+        .map(({ node: { id, frontmatter } }) => (
+          <Item key={id} onClick={onClick} {...frontmatter} />
+        ))
+      }
     </Layout>
-  )
+  </>)
 }
 
-function Preview({ path, onClick, title, author, date, summary, Bg }) {
-  const container = useRef(null)
+function Item({ onClick, path, ...props }) {
   return (
-    <div className={style.postContainer}>
-      <div ref={container} className={style.postBackground}>
-        {Bg && <ResizeProvider track={container}><Bg /></ResizeProvider>}
-      </div>
-      <LinkBox
-        linkText={`open ${path}.md`}
-        to={path} tabIndex='0'
-        onClick={onClick(path)}
-        className={style.postTitle}>
-        <Title
-          excerpt={summary}
-          author={author}
-          date={date}
-        >
-          {title}
-        </Title>
-      </LinkBox>
-    </div>
+    <Preview
+      path={path} to={path}
+      tabIndex='0'
+      onClick={onClick(path)}
+      className={style.postTitle}
+      {...props} />
   )
 }
 
-export const pageQuery = graphql`
-  query IndexQuery {
-    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
-      edges {
-        node {
-          excerpt(pruneLength: 250)
-          id
-          frontmatter {
-            title
-            author
-            date(formatString: "YYYY-MM-DD")
-            path
-            summary
-          }
+export const pageQuery = graphql`query IndexQuery {
+  allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date] }) {
+    edges {
+      node { 
+        id
+        frontmatter {
+          title
+          author
+          date(formatString: "YYYY-MM-DD")
+          path
+          summary
         }
       }
     }
-  }`
+  }
+  site {
+    siteMetadata {
+      title
+    }
+  }
+}`
