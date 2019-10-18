@@ -33,7 +33,7 @@ export const pageQuery = graphql`
 query groupSeries($series: String!) {
   allMarkdownRemark(
       filter: {frontmatter: {series: {eq: $series}}},
-      sort: {fields: frontmatter___date, order: DESC}
+      sort: {fields: frontmatter___date, order: ASC}
   ) {
     group(field: frontmatter___series) {
       nodes {
