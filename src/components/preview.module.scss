@@ -36,6 +36,9 @@
     list-style-type: none;
     min-width: 15em;
     width: 60%;
+    @media screen and (max-width: $mobile-size) {
+        width: 90%;
+    }
     max-width: 750px;
     margin: 0 auto;
 }
