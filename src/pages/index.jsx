@@ -41,7 +41,7 @@ export default function IndexPage({ data }) {
 
 function Item({ bg, onClick, allSeries, series, color, path, ...props }) {
   const item = useRef()
-  const isVisible = useVisibility(item.current)
+  const isVisible = typeof window !== 'undefined' ? useVisibility(item.current) : false
   const { setBg } = useContext(BgContext)
   if (isVisible) { setBg(bg) }
 

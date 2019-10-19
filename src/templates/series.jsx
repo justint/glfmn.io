@@ -29,7 +29,7 @@ export default function Template(
 
 const Item = ({ bg, ...props }) => {
   const item = useRef()
-  const isVisible = useVisibility(item.current)
+  const isVisible = typeof window !== 'undefined' ? useVisibility(item.current) : false
   const { setBg } = useContext(BgContext)
   console.log('Rendering')
   if (isVisible) { setBg(bg) }
