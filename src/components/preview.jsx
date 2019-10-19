@@ -1,8 +1,10 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useContext, useRef } from 'react'
 import ResizeProvider from '../resize'
 import Pane, { LinkBox } from './pane'
 import classNames from 'classnames'
 import Background from '../components/backgrounds'
+import useVisibility from 'react-use-visibility'
+import Loadable from 'react-loadable'
 
 import style from './preview.module.scss'
 
@@ -44,6 +46,19 @@ export const BgProvider = ({ initial, children }) => {
         </BgContext.Provider>
     )
 }
+
+const SetBgImpl = ({ item, bg }) => {
+    const isVisible = useVisibility(item.current)
+    const { setBg } = useContext(BgContext)
+    if (isVisible) { setBg(bg) }
+
+    return (<></>)
+}
+
+export const SetBg = Loadable({
+    loader: () => new Promise((resolve, reject) => resolve(SetBgImpl)),
+    loading: () => <></>
+})
 
 export const ListPane = ({ className, itemClass, itemStyle, bg, children, ...props }) => {
     const childStyle = { ...itemStyle, display: 'flex', alignItems: 'center', }

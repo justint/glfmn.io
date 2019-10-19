@@ -1,10 +1,9 @@
-import React, { useRef, useContext } from 'react'
+import React, { useRef } from 'react'
 import { Box } from '../components/pane'
-import Preview, { Label, BgContext } from '../components/preview'
+import Preview, { Label, SetBg } from '../components/preview'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import { graphql } from 'gatsby'
-import useVisibility from 'react-use-visibility';
 
 import styles from './series.module.scss'
 
@@ -29,11 +28,8 @@ export default function Template(
 
 const Item = ({ bg, ...props }) => {
   const item = useRef()
-  const isVisible = typeof window !== 'undefined' ? useVisibility(item.current) : false
-  const { setBg } = useContext(BgContext)
-  console.log('Rendering')
-  if (isVisible) { setBg(bg) }
   return <div ref={item} style={{ padding: 0, margin: 0, with: '100%' }}>
+    <SetBg item={item} bg={bg} />
     <Preview className={styles.postTitle} {...props} />
   </div>
 }

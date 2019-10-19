@@ -1,11 +1,10 @@
 import React, { useRef, useContext } from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
-import Preview, { Label, BgContext } from '../components/preview'
+import Preview, { Label, SetBg } from '../components/preview'
 import { PushDContext } from '../components/pushd'
 import SEO from '../components/seo'
 import Header from '../components/header'
-import useVisibility from 'react-use-visibility'
 
 import style from './index.module.scss'
 
@@ -41,12 +40,9 @@ export default function IndexPage({ data }) {
 
 function Item({ bg, onClick, allSeries, series, color, path, ...props }) {
   const item = useRef()
-  const isVisible = typeof window !== 'undefined' ? useVisibility(item.current) : false
-  const { setBg } = useContext(BgContext)
-  if (isVisible) { setBg(bg) }
-
   return (
     <div ref={item} style={{ margin: 0, padding: 0, width: '100%' }}>
+      <SetBg item={item} bg={bg} />
       <Preview
         path={path} to={path}
         tabIndex='0'
