@@ -6,7 +6,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background-color: $dark-bg2;
+    background-color: var(--bg2);
 
     * {
         margin: 0 1em;
@@ -14,7 +14,7 @@
 }
 
 .file {
-    color: $dark-bright-aqua;
+    color: var(--bright-aqua);
     font-weight: bold;
 }
 
