@@ -28,7 +28,7 @@ export default function Template(
 
 const Item = ({ bg, ...props }) => {
   const item = useRef()
-  return <div ref={item} style={{ padding: 0, margin: 0, with: '100%' }}>
+  return <div ref={item} style={{ padding: 0, margin: 0, width: '100%' }}>
     <SetBg item={item} bg={bg} />
     <Preview className={styles.postTitle} {...props} />
   </div>
