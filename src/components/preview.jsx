@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import ResizeProvider from '../resize'
 import Pane, { LinkBox } from './pane'
 import classNames from 'classnames'
+import Background from '../components/backgrounds'
 
 import style from './preview.module.scss'
 
@@ -25,21 +26,38 @@ export const Label = ({ className, color, children, hover, ...props }) => {
     )
 }
 
+export const BgContext = React.createContext({});
+
+export const BgProvider = ({ initial, children }) => {
+    const container = useRef()
+
+    const [Bg, setBgState] = useState(initial)
+    const setBg = bg => setBgState(bg || initial)
+    function resetBg() { setBgState(initial) }
+
+    return (
+        <BgContext.Provider value={{ resetBg, setBg, Bg }}>
+            <div ref={container} className={style.background}>
+                {Bg && <ResizeProvider track={container}><Background bg={Bg} /></ResizeProvider>}
+            </div>
+            {children}
+        </BgContext.Provider>
+    )
+}
+
 export const ListPane = ({ className, itemClass, itemStyle, bg, children, ...props }) => {
-    const container = useRef(null)
     const childStyle = { ...itemStyle, display: 'flex', alignItems: 'center', }
     const itemProps = { className: classNames(itemClass, style.listItem), style: childStyle }
-    const [Bg,] = useState(bg)
-    return <Pane classNames={className} {...props}>
-        <div ref={container} className={style.background}>
-            {Bg && <ResizeProvider track={container}><Bg /></ResizeProvider>}
-        </div>
-        <ul className={style.list}>
-            {React.Children.map(
-                children,
-                ({ key, ...child }) => <li key={key}  {...itemProps}>{child}</li>
-            )}
-        </ul>
+
+    return <Pane className={className} {...props}>
+        <BgProvider initial={bg}>
+            <ul className={style.list}>
+                {React.Children.map(
+                    children,
+                    ({ key, ...child }) => <li key={key}  {...itemProps}>{child}</li>
+                )}
+            </ul>
+        </BgProvider>
     </Pane>
 }
 

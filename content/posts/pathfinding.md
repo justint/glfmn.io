@@ -24,7 +24,7 @@ This work was only possible thanks to the research at the [FSU CISCOR][CISCOR] r
 With the rust tool-chain installed, clone the repository and build it with
 cargo:
 
-```
+```bash
 $ git clone https://github.com/glfmn/path_demo.git
 $ cd path_demo
 $ cargo run --release

@@ -4,8 +4,9 @@ title: 'Glitter: informative git prompt'
 author: 'glfmn'
 date: '2019-10-03'
 summary: 'Glitter is a format language which serves git status information to your shell prompt in any format.'
-draft: true
+draft: 'true'
 series: 'Glitter'
+bg: 'Hash'
 ---
 
 Glitter is a cross-platform command-line tool and format language for making informative git prompts.  Glitter's interpreter, `glit` will:

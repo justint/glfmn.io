@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useRef, useContext } from 'react'
 import { Box } from '../components/pane'
-import Preview, { Label } from '../components/preview'
+import Preview, { Label, BgContext } from '../components/preview'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import { graphql } from 'gatsby'
+import useVisibility from 'react-use-visibility';
 
 import styles from './series.module.scss'
 
@@ -12,6 +13,7 @@ export default function Template(
 ) {
   const { name, description, color } = series
   const pages = allMarkdownRemark.group[0].nodes
+
   return (<div className={styles.page}>
     <SEO description={description} title={name} />
     <Layout>
@@ -25,9 +27,16 @@ export default function Template(
   </div>)
 }
 
-const Item = (props) => (
-  <Preview className={styles.postTitle} {...props} />
-)
+const Item = ({ bg, ...props }) => {
+  const item = useRef()
+  const isVisible = useVisibility(item.current)
+  const { setBg } = useContext(BgContext)
+  console.log('Rendering')
+  if (isVisible) { setBg(bg) }
+  return <div ref={item} style={{ padding: 0, margin: 0, with: '100%' }}>
+    <Preview className={styles.postTitle} {...props} />
+  </div>
+}
 
 export const pageQuery = graphql`
 query groupSeries($series: String!) {
@@ -44,6 +53,7 @@ query groupSeries($series: String!) {
           path
           summary
           draft
+          bg
         }
         id
       }
