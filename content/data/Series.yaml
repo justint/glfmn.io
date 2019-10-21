@@ -1,8 +1,8 @@
 - name: SBMPO
   description: 
     Sampling based, model-predictive optimization is a technique for solving
-    optimization problems combining graph search with practices from the field
-    of controls.
+    optimization problems in the field of robotics using graph search algorithms
+    with techniques from the field of controls optimiation.
   color: 'purple'
   bg: 'cave-generator'
 - name: Glitter
