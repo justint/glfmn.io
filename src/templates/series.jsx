@@ -7,23 +7,29 @@ import { graphql } from 'gatsby'
 
 import styles from './series.module.scss'
 
-export default function Template(
-  { data: { series, allMarkdownRemark } }
-) {
-  const { name, description, color } = series
+export default function Template({ data: { series, allMarkdownRemark } }) {
+  const { name, description } = series
   const pages = allMarkdownRemark.group[0].nodes
 
   return (<div className={styles.page}>
     <SEO description={description} title={name} />
     <Layout>
-      <Box className={styles.postTitle}>
-        <Label className={styles.label} color={color}>{name}</Label>
-        <br />
-        <p>{description}</p>
-      </Box>
+      <Description {...series} />
       {pages.map(({ id, frontmatter }) => <Item key={id} {...frontmatter} />)}
     </Layout>
   </div>)
+}
+
+const Description = ({ name, description, bg, color }) => {
+  let item = useRef()
+  return (
+    <Box className={styles.postTitle}>
+      <SetBg item={item} bg={bg} />
+      <Label className={styles.label} color={color}>{name}</Label>
+      <br />
+      <p ref={item}>{description}</p>
+    </Box>
+  )
 }
 
 const Item = ({ bg, ...props }) => {
@@ -59,5 +65,6 @@ query groupSeries($series: String!) {
     description
     name
     color
+    bg
   }
 }`

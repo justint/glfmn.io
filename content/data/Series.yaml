@@ -4,7 +4,7 @@
     optimization problems combining graph search with practices from the field
     of controls.
   color: 'purple'
-  Bg: null
+  bg: 'cave-generator'
 - name: Glitter
   description:
     Glitter is a tool for designing custom shell prompts with embedded git
