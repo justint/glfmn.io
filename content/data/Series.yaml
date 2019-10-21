@@ -10,3 +10,4 @@
     Glitter is a tool for designing custom shell prompts with embedded git
     information.
   color: 'aqua'
+  bg: 'git'
