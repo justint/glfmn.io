@@ -27,7 +27,8 @@
     "react-helmet": "^5.2.1",
     "react-loadable": "^5.5.0",
     "react-use-visibility": "^0.3.0",
-    "resize-observer-polyfill": "^1.5.1"
+    "resize-observer-polyfill": "^1.5.1",
+    "rot-js": "^2.1.1"
   },
   "devDependencies": {
     "prettier": "^1.18.2"
