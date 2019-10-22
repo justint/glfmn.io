@@ -9,7 +9,7 @@ export default function ResizeProvider({ track, children }) {
 
   return (
     <ResizeContext.Provider value={rect}>
-      { children }
+      {children}
     </ResizeContext.Provider>
   )
 }

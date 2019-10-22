@@ -33,14 +33,16 @@ export const BgContext = React.createContext({});
 export const BgProvider = ({ initial, children }) => {
     const container = useRef()
 
-    const [Bg, setBgState] = useState(initial)
+    const [bg, setBgState] = useState(initial)
     const setBg = bg => setBgState(bg || initial)
     function resetBg() { setBgState(initial) }
 
     return (
-        <BgContext.Provider value={{ resetBg, setBg, Bg }}>
+        <BgContext.Provider value={{ resetBg, setBg, bg }}>
             <div ref={container} className={style.background}>
-                {Bg && <ResizeProvider track={container}><Background bg={Bg} /></ResizeProvider>}
+                <ResizeProvider track={container}>
+                    <Background bg={bg} />
+                </ResizeProvider>
             </div>
             {children}
         </BgContext.Provider>
@@ -84,3 +86,4 @@ export const Title = ({ excerpt, author, date, children }) => (
         {excerpt && <span className={style.excerpt}>{excerpt}</span>}
     </>
 )
+
