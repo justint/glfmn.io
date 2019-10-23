@@ -14,21 +14,16 @@ export default function Rot({ width, height, draw, interval }) {
   }
   const tile = useRef()
 
-  const [display, setDisplay] = useState(null)
+  const [display,] = useState(new Display({
+    fontFamily: 'Source Code Pro',
+    // support serverside rendering with display
+    layout: typeof document !== 'undefined' ? 'rect' : 'term',
+  }))
 
-  if (display) {
-    display.setOptions(dims(tile, width, height))
-    draw && !interval && draw(display)
-  } else {
-    setDisplay(new Display({
-      ...dims(tile, width, height),
-      fontFamily: 'Source Code Pro',
-      fg: '#928374', // gray
-      bg: '#282828', // transparent background
-      // support serverside rendering with display
-      layout: typeof document !== 'undefined' ? 'rect' : 'term'
-    }))
-  }
+  useEffect(() => {
+    display.setOptions(opts(tile, width, height))
+    if (draw && !interval) draw(display)
+  })
 
   useEffect(
     () => {
@@ -40,7 +35,6 @@ export default function Rot({ width, height, draw, interval }) {
     },
     [display]
   )
-
 
   useEffect(
     () => {
@@ -59,7 +53,7 @@ export default function Rot({ width, height, draw, interval }) {
   )
 }
 
-const dims = (tile, width, height) => {
+const opts = (tile, width, height) => {
   if (tile && tile.current) {
     const tileWidth = tile.current.clientWidth
     const tileHeight = tile.current.clientHeight
@@ -68,7 +62,9 @@ const dims = (tile, width, height) => {
       tileWidth,
       tileHeight,
       width: width / tileWidth,
-      height: height / tileHeight
+      height: height / tileHeight,
+      fg: getComputedStyle(tile.current).getPropertyValue('--gray'),
+      bg: getComputedStyle(tile.current).getPropertyValue('--bg0'),
     }
   }
 
@@ -76,6 +72,8 @@ const dims = (tile, width, height) => {
     tileWidth: 9,
     tileHeight: 15,
     width: width / 9,
-    height: height / 15
+    height: height / 15,
+    fg: '#928374', // dark gray
+    bg: '#282828', // dark bg0
   }
 }
