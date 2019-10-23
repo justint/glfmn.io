@@ -10,16 +10,13 @@ html {
   font-family: 'Source Code Pro', monospace;
   text-size-adjust: 100%;
 
-  font-size: 14px;
+  font-size: 15px;
 
   @media (min-width: $large-size) {
-      & { font-size: 15px; }
+      & { font-size: 15.5px; }
   }
   @media (max-width: $mobile-size) {
-      & { font-size: 12.5px; }
-  }
-  @media (max-width: 380px) {
-      & { font-size: 12px; }
+      & { font-size: 16px; }
   }
   line-height: normal;
 }
