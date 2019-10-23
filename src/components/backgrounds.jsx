@@ -3,6 +3,8 @@ import { ResizeContext } from '../resize'
 import useInterval from '../interval'
 import Loadable from 'react-loadable'
 
+import Cave from './backgrounds/cave'
+
 const Background = ({ bg }) => {
   let rect = useContext(ResizeContext)
 
@@ -10,6 +12,8 @@ const Background = ({ bg }) => {
   const height = rect ? rect.height : 480
 
   switch (bg) {
+    case 'cave-generator':
+      return <Cave width={width} height={height} />
     case 'noise':
       return <Display width={width} height={height} draw={noise} interval={66} />
     default:
@@ -19,7 +23,7 @@ const Background = ({ bg }) => {
 
 export default Background
 
-const Display = Loadable({
+export const Display = Loadable({
   loader: () => import('./rot'),
   loading: () => <Spinner type='circle' />,
   render: (loaded, props) => {
