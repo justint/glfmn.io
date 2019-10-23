@@ -18,13 +18,13 @@ export default function Rot({ width, height, draw, interval }) {
 
   if (display) {
     display.setOptions(dims(tile, width, height))
-    draw && draw(display)
+    draw && !interval && draw(display)
   } else {
     setDisplay(new Display({
       ...dims(tile, width, height),
       fontFamily: 'Source Code Pro',
       fg: '#928374', // gray
-      bg: '#28282800', // transparent background
+      bg: '#282828', // transparent background
       // support serverside rendering with display
       layout: typeof document !== 'undefined' ? 'rect' : 'term'
     }))
@@ -32,7 +32,7 @@ export default function Rot({ width, height, draw, interval }) {
 
   useEffect(
     () => {
-      if ('current' in canvas) {
+      if (canvas.current) {
         const d = display.getContainer()
         canvas.current.appendChild(d)
         return () => d.remove()
@@ -41,12 +41,11 @@ export default function Rot({ width, height, draw, interval }) {
     [display]
   )
 
-  const [loop, setLoop] = useState()
+
   useEffect(
     () => {
       if (draw && interval) {
-        setLoop(setInterval(draw, interval, display))
-        console.log('Create loop')
+        const loop = setInterval(draw, interval, display)
         return () => clearInterval(loop)
       }
     },
