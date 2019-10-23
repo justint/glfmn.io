@@ -1,7 +1,23 @@
-import React, { useContext, useRef, useState, useEffect } from 'react'
+import React, { useContext, useState } from 'react'
 import { ResizeContext } from '../resize'
-
+import useInterval from '../interval'
 import Loadable from 'react-loadable'
+
+const Background = ({ bg }) => {
+  let rect = useContext(ResizeContext)
+
+  const width = rect ? rect.width : 720
+  const height = rect ? rect.height : 480
+
+  switch (bg) {
+    case 'noise':
+      return <Display width={width} height={height} draw={noise} interval={66} />
+    default:
+      return <Display width={width} height={height} draw={arrows} />
+  }
+}
+
+export default Background
 
 const Display = Loadable({
   loader: () => import('./rot'),
@@ -30,22 +46,6 @@ const Spinner = ({ type, items, rate, pastDelay }) => {
   else
     return <></>
 }
-
-const Background = ({ bg }) => {
-  let rect = useContext(ResizeContext)
-
-  const width = rect ? rect.width : 720
-  const height = rect ? rect.height : 480
-
-  switch (bg) {
-    case 'noise':
-      return <Display width={width} height={height} draw={noise} interval={66} />
-    default:
-      return <Display width={width} height={height} draw={arrows} />
-  }
-}
-
-export default Background
 
 const noise = (display) => {
   if (!display) return
@@ -81,22 +81,4 @@ const arrows = (display) => {
       display.draw(5, y - 3, '⁘')
     }
   }
-}
-
-function useInterval(fn, delay, ...args) {
-  const loop = useRef()
-
-  // Remember the latest callback.
-  useEffect(() => loop.current = () => fn(...args), [fn, args])
-
-  // Set up the interval.
-  useEffect(() => {
-    function tick() {
-      loop.current()
-    }
-    if (delay !== null && delay !== undefined) {
-      const id = setInterval(tick, delay)
-      return () => clearInterval(id)
-    }
-  }, [delay])
 }
