@@ -1,6 +1,11 @@
+
 .label {
     position: absolute;
     // top: -1.5em;
     top: -1px;
     left: -1px;
+}
+
+:hover > .label {
+    color: var(--fg0)
 }
