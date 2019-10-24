@@ -25,7 +25,7 @@ export default function Rot({ width, height, draw, interval }) {
     const canvas = display.getContainer()
     canvas.style.width = width + 'px'
     canvas.style.height = height + 'px'
-    if (draw && !interval) draw(display)
+    if (draw) draw(display)
   })
 
   useEffect(
