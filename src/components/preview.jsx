@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef, useEffect } from 'react'
+import React, { useState, useContext, useRef, useEffect, useCallback } from 'react'
 import ResizeProvider from '../resize'
 import Pane, { LinkBox } from './pane'
 import classNames from 'classnames'
@@ -34,8 +34,8 @@ export const BgProvider = ({ initial, children }) => {
     const container = useRef()
 
     const [bg, setCtx] = useState(initial)
-    function setBg(bg) { setCtx(bg || initial) }
-    function resetBg() { setCtx(initial) }
+    const setBg = useCallback((bg) => setCtx(bg || initial), [initial])
+    const resetBg = useCallback(() => setCtx(initial), [initial])
 
     return (
         <BgContext.Provider value={{ bg, setBg, resetBg }}>
