@@ -25,7 +25,7 @@ export default Background
 
 export const Display = Loadable({
   loader: () => import('./rot'),
-  loading: () => <Spinner type='bar' rate='100' />,
+  loading: () => <Spinner type='dots' rate='100' />,
   render: (loaded, props) => {
     const Component = loaded.default
     return <Component {...props} />
@@ -34,7 +34,8 @@ export const Display = Loadable({
 
 const Spinner = ({ type, items, rate, pastDelay }) => {
   const spinners = {
-    'dots': ['⠁', '⠂', '⠄', '⡀', '⢀', '⠠', '⠐', '⠈'],
+    'square dots': ['⠁', '⠂', '⠄', '⡀', '⢀', '⠠', '⠐', '⠈'],
+    'dots': ['⢄', '⢂', '⢁', '⡁', '⡈', '⡐', '⡠'],
     'bar': ['\\', '|', '/', '-'],
     'ellipsis': ['   ', '.  ', '.. ', '...', ' ..', '  .'],
     'circle': ['◜', '◠', '◝', '◞', '◡', '◟'],
