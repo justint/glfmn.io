@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from 'react'
+import React, { useState, useContext, useRef, useEffect } from 'react'
 import ResizeProvider from '../resize'
 import Pane, { LinkBox } from './pane'
 import classNames from 'classnames'
@@ -33,12 +33,12 @@ export const BgContext = React.createContext({});
 export const BgProvider = ({ initial, children }) => {
     const container = useRef()
 
-    const [bg, setBgState] = useState(initial)
-    const setBg = bg => setBgState(bg || initial)
-    function resetBg() { setBgState(initial) }
+    const [bg, setCtx] = useState(initial)
+    function setBg(bg) { setCtx(bg || initial) }
+    function resetBg() { setCtx(initial) }
 
     return (
-        <BgContext.Provider value={{ resetBg, setBg, bg }}>
+        <BgContext.Provider value={{ bg, setBg, resetBg }}>
             <div ref={container} className={style.background}>
                 <ResizeProvider track={container}>
                     <Background bg={bg} />
@@ -52,14 +52,20 @@ export const BgProvider = ({ initial, children }) => {
 const SetBgImpl = ({ item, bg }) => {
     const isVisible = useVisibility(item.current)
     const { setBg } = useContext(BgContext)
-    if (isVisible) { setBg(bg) }
 
-    return (<></>)
+    // For some reason, simply setting the BG without checking visibility
+    // works this way; HACK: this prevents issues where clicking a link
+    // within the page causes some issue with getting effects to properly
+    // run.  Backgrounds werent getting set at all, and the visibility
+    // never appears to update without setBg being called.
+    useEffect(() => { setBg(bg) }, [isVisible, bg])
+
+    return null
 }
 
 export const SetBg = Loadable({
     loader: () => new Promise((resolve, reject) => resolve(SetBgImpl)),
-    loading: () => <></>
+    loading: () => null
 })
 
 export const ListPane = ({ className, itemClass, itemStyle, bg, children, ...props }) => {
