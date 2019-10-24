@@ -25,7 +25,7 @@ export default Background
 
 export const Display = Loadable({
   loader: () => import('./rot'),
-  loading: () => <Spinner type='circle' />,
+  loading: () => <Spinner type='bar' rate='100' />,
   render: (loaded, props) => {
     const Component = loaded.default
     return <Component {...props} />
@@ -35,9 +35,8 @@ export const Display = Loadable({
 const Spinner = ({ type, items, rate, pastDelay }) => {
   const spinners = {
     'dots': ['⠁', '⠂', '⠄', '⡀', '⢀', '⠠', '⠐', '⠈'],
-    'bar': ['/', '|', '\\', '-'],
-    'elipsis': ['   ', '.  ', '.. ', '...', ' ..', '  .'],
-    'elipsis bar': ['⋰', '⋮', '⋱', '⋯'],
+    'bar': ['\\', '|', '/', '-'],
+    'ellipsis': ['   ', '.  ', '.. ', '...', ' ..', '  .'],
     'circle': ['◜', '◠', '◝', '◞', '◡', '◟'],
   }
   const selection = type in spinners ? spinners[type] : spinners['dots']
@@ -45,8 +44,15 @@ const Spinner = ({ type, items, rate, pastDelay }) => {
   const [index, setIndex] = useState(0)
   const inc = () => setIndex((index + 1) % spin.length)
   useInterval(inc, rate || 250)
+  const style = {
+    padding: 0,
+    margin: 0,
+    position: 'absolute',
+    right: '1em',
+    fontSize: '2em',
+  }
   if (pastDelay)
-    return <pre style={{ padding: 0, margin: 0 }}>{spin[index]}</pre>
+    return <pre style={style}>{spin[index]}</pre>
   else
     return <></>
 }
