@@ -22,6 +22,9 @@ export default function Rot({ width, height, draw, interval }) {
 
   useEffect(() => {
     display.setOptions(opts(tile, width, height))
+    const canvas = display.getContainer()
+    canvas.style.width = width + 'px'
+    canvas.style.height = height + 'px'
     if (draw && !interval) draw(display)
   })
 
@@ -55,12 +58,13 @@ export default function Rot({ width, height, draw, interval }) {
 
 const opts = (tile, width, height) => {
   if (tile && tile.current) {
+    // Get the device pixel ratio, falling back to 1.
+    const dpr = window.devicePixelRatio || 1
+    const fontSize = getComputedStyle(tile.current).getPropertyValue('font-size')
     const tileWidth = tile.current.clientWidth
     const tileHeight = tile.current.clientHeight
-
     return {
-      tileWidth,
-      tileHeight,
+      fontSize: parseInt(fontSize) * dpr,
       width: width / tileWidth,
       height: height / tileHeight,
       fg: getComputedStyle(tile.current).getPropertyValue('--gray'),
