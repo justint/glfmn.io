@@ -34,7 +34,7 @@ export default function useVisibility({ partial = false, rate = 150 }) {
       return
 
     function check() { setVisibile(checkVisibility(ref.current, partial)) }
-    check()
+    if (ref.current) check()
 
     window.addEventListener('resize', check)
     window.addEventListener('scroll', check)
