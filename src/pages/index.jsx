@@ -1,7 +1,7 @@
-import React, { useRef, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
-import Preview, { Label, SetBg } from '../components/preview'
+import Preview, { PostBg, LinkLabel } from '../components/preview'
 import { PushDContext } from '../components/pushd'
 import SEO from '../components/seo'
 import Header from '../components/header'
@@ -25,34 +25,33 @@ export default function IndexPage({ data }) {
     {}
   )
 
+  const [bg, setBg] = useState(null)
+
   return (<>
     <SEO title="Home" />
-    <Layout header={<Header siteTitle={siteMetadata.title} />}>
+    <Layout bg={<PostBg bg={bg} />} header={<Header siteTitle={siteMetadata.title} />}>
       {posts
         .filter(({ node: { frontmatter: { title } } }) => title.length > 0)
-        .map(({ node: { id, frontmatter: f } }) => (
-          <Item key={id} color={colors[f.series]} onClick={onClick} {...f} />
+        .map(({ node: { id, frontmatter: { series, bg, ...f } } }) => (
+          <Preview
+            key={id}
+            onVisible={() => { setBg(bg) }}
+            tabIndex='0'
+            onClick={onClick(f.path)}
+            {...f}>
+            {series && <SeriesLabel series={series} colors={colors} />}
+          </Preview>
         ))
       }
     </Layout>
   </>)
 }
 
-function Item({ bg, onClick, allSeries, series, color, path, ...props }) {
-  const item = useRef()
-  return (
-    <div ref={item} style={{ margin: 0, padding: 0, width: '100%' }}>
-      <SetBg item={item} bg={bg} />
-      <Preview
-        path={path} to={path}
-        tabIndex='0'
-        onClick={onClick(path)}
-        {...props}>
-        {series && <Label className={style.label} color={color}>{series}</Label>}
-      </Preview>
-    </div>
-  )
-}
+const SeriesLabel = ({ series, colors }) => (
+  <LinkLabel to={`/s/${series}`} className={style.label} color={colors[series]}>
+    {series}
+  </LinkLabel>
+)
 
 export const pageQuery = graphql`query IndexQuery {
   allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date] }) {

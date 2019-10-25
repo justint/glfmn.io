@@ -19,8 +19,15 @@
     &.hover:hover { --series-color: var(--bright-yellow) }
 }
 
-.label:hover, a:hover .label {
+.label:hover, a:hover .label, :hover > .label > a {
     color: var(--fg0);
+}
+
+.link-label {
+    color: inherit;
+    text-decoration: none;
+    border: none;
+    border-bottom: none;
 }
 
 .list {
@@ -36,6 +43,16 @@
     }
     max-width: 750px;
     margin: 0 auto;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+
+    & > * {
+        width: 100%;
+    }
 }
 
 .background {

@@ -7,14 +7,13 @@ import Footer from './footer'
 
 import './layout.scss'
 
-const Layout = ({ header, children }) => {
+const Layout = ({ bg, header, children }) => {
   const listStyle = { textAlign: 'center', position: 'relative' }
-  const itemStyle = { height: '100vh' }
   return (
     <div className='page-container'>
       <header className='page-header'>{header}</header>
       <main className='page-content'>
-        <ListPane style={listStyle} itemStyle={itemStyle}>
+        <ListPane bg={bg} style={listStyle}>
           {children}
         </ListPane>
       </main>

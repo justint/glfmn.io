@@ -1,10 +1,9 @@
-import React, { useState, useContext, useRef, useEffect, useCallback } from 'react'
+import React, { useRef } from 'react'
+import { Link } from 'gatsby'
 import ResizeProvider from '../resize'
 import Pane, { LinkBox } from './pane'
 import classNames from 'classnames'
 import Background from '../components/backgrounds'
-import useVisibility from 'react-use-visibility'
-import Loadable from 'react-loadable'
 
 import style from './preview.module.scss'
 
@@ -21,68 +20,39 @@ export default Preview
 
 export const Label = ({ className, color, children, hover, ...props }) => {
     const c = classNames(className, style.label, style[color], hover && style.hover)
-    return (
-        <span {...props} className={c}>
-            {children}
-        </span>
-    )
+    return <span {...props} className={c}>
+        {children}
+    </span>
 }
 
-export const BgContext = React.createContext({});
+export const LinkLabel = ({ to, children, ...props }) => (
+    <Label {...props}>
+        <Link to={to} className={style.linkLabel}>{children}</Link>
+    </Label>
+)
 
-export const BgProvider = ({ initial, children }) => {
+export const PostBg = ({ bg }) => {
     const container = useRef()
-
-    const [bg, setCtx] = useState(initial)
-    const setBg = useCallback((bg) => setCtx(bg || initial), [initial])
-    const resetBg = useCallback(() => setCtx(initial), [initial])
-
     return (
-        <BgContext.Provider value={{ bg, setBg, resetBg }}>
-            <div ref={container} className={style.background}>
-                <ResizeProvider track={container}>
-                    <Background bg={bg} />
-                </ResizeProvider>
-            </div>
-            {children}
-        </BgContext.Provider>
+        <div ref={container} className={style.background}>
+            <ResizeProvider track={container}>
+                <Background bg={bg} />
+            </ResizeProvider>
+        </div>
     )
 }
 
-const SetBgImpl = ({ item, bg }) => {
-    const isVisible = useVisibility(item.current)
-    const { setBg } = useContext(BgContext)
-
-    // For some reason, simply setting the BG without checking visibility
-    // works this way; HACK: this prevents issues where clicking a link
-    // within the page causes some issue with getting effects to properly
-    // run.  Backgrounds werent getting set at all, and the visibility
-    // never appears to update without setBg being called.
-    useEffect(() => { setBg(bg) }, [isVisible, bg])
-
-    return null
-}
-
-export const SetBg = Loadable({
-    loader: () => new Promise((resolve, reject) => resolve(SetBgImpl)),
-    loading: () => null
-})
-
-export const ListPane = ({ className, itemClass, itemStyle, bg, children, ...props }) => {
-    const childStyle = { ...itemStyle, display: 'flex', alignItems: 'center', }
-    const itemProps = { className: classNames(itemClass, style.listItem), style: childStyle }
-
-    return <Pane className={className} {...props}>
-        <BgProvider initial={bg}>
-            <ul className={style.list}>
-                {React.Children.map(
-                    children,
-                    ({ key, ...child }) => <li key={key}  {...itemProps}>{child}</li>
-                )}
-            </ul>
-        </BgProvider>
+export const ListPane = ({ bg, className, children, ...props }) => (
+    <Pane className={className} {...props}>
+        {bg}
+        <ul className={style.list}>
+            {React.Children.map(
+                children,
+                ({ key, ...child }) => <li key={key} className={style.listItem}>{child}</li>
+            )}
+        </ul>
     </Pane>
-}
+)
 
 export const Title = ({ excerpt, author, date, children }) => (
     <>

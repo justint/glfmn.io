@@ -1,6 +1,6 @@
-import React, { useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Box } from '../components/pane'
-import Preview, { Label, SetBg } from '../components/preview'
+import Preview, { Label, PostBg } from '../components/preview'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import { graphql } from 'gatsby'
@@ -11,34 +11,32 @@ export default function Template({ data: { series, allMarkdownRemark } }) {
   const { name, description } = series
   const pages = allMarkdownRemark.group[0].nodes
 
+  const [bg, setBg] = useState(null)
+  // useEffect(() => { setBg(bg || series.bg) }, [])
+
   return (<div className={styles.page}>
     <SEO description={description} title={name} />
-    <Layout>
-      <Description {...series} />
-      {pages.map(({ id, frontmatter }) => <Item key={id} {...frontmatter} />)}
+    <Layout bg={<PostBg bg={bg} />}>
+      <Description onVisible={() => setBg(series.bg)} {...series} />
+      {pages.map(({ id, frontmatter: f }) =>
+        <Preview
+          key={id}
+          onVisible={() => { setBg(f.bg) }}
+          className={styles.postTitle}
+          {...f}
+        />
+      )}
     </Layout>
   </div>)
 }
 
-const Description = ({ name, description, bg, color }) => {
-  let item = useRef()
-  return (
-    <Box className={styles.postTitle}>
-      <SetBg item={item} bg={bg} />
-      <Label className={styles.label} color={color}>{name}</Label>
-      <br />
-      <p ref={item}>{description}</p>
-    </Box>
-  )
-}
-
-const Item = ({ bg, ...props }) => {
-  const item = useRef()
-  return <div ref={item} style={{ padding: 0, margin: 0, width: '100%' }}>
-    <SetBg item={item} bg={bg} />
-    <Preview className={styles.postTitle} {...props} />
-  </div>
-}
+const Description = ({ name, onVisible, description, color }) => (
+  <Box onVisible={onVisible} className={styles.postTitle}>
+    <Label className={styles.label} color={color}>{name}</Label>
+    <br />
+    <p>{description}</p>
+  </Box>
+)
 
 export const pageQuery = graphql`
 query groupSeries($series: String!) {
