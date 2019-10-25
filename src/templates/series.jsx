@@ -11,7 +11,7 @@ export default function Template({ data: { series, allMarkdownRemark } }) {
   const { name, description } = series
   const pages = allMarkdownRemark.group[0].nodes
 
-  const [bg, setBg] = useState(null)
+  const [bg, setBg] = useState(series.bg)
 
   return (<div className={styles.page}>
     <SEO description={description} title={name} />
