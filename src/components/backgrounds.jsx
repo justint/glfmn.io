@@ -16,6 +16,7 @@ const Background = ({ bg }) => {
       return <Cave width={width} height={height} />
     case 'noise':
       return <Display width={width} height={height} draw={noise} interval={66} />
+    case 'arrows':
     default:
       return <Display width={width} height={height} draw={arrows} />
   }
