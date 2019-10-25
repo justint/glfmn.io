@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Box } from '../components/pane'
 import Preview, { Label, PostBg } from '../components/preview'
 import Layout from '../components/layout'
@@ -12,7 +12,6 @@ export default function Template({ data: { series, allMarkdownRemark } }) {
   const pages = allMarkdownRemark.group[0].nodes
 
   const [bg, setBg] = useState(null)
-  // useEffect(() => { setBg(bg || series.bg) }, [])
 
   return (<div className={styles.page}>
     <SEO description={description} title={name} />

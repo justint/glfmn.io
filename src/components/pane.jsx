@@ -1,9 +1,9 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'gatsby'
 import classNames from 'classnames'
 
-import useVisibility from 'react-use-visibility'
-import { useDebounce } from 'use-debounce'
+import useVisibility from '../visible'
+
 
 import style from './pane.module.scss'
 
@@ -20,14 +20,8 @@ const Pane = React.forwardRef(({ className, foot, children, ...props }, ref) => 
 
 export default Pane
 
-function useVisibleCallback(onVisible, throttle = 250) {
-  const ref = useRef()
-  const rawVisible = useVisibility(ref.current)
-  const [visible] = useDebounce(rawVisible, throttle)
-  // HACK: if I do not do this and get the elements to re-draw,
-  // then the refs are never updated and visibility can never
-  // be set, meaning the backgrounds will never update.
-  if (!ref.current && onVisible) onVisible()
+function useVisibleCallback(onVisible, rate = 250) {
+  const [visible, ref] = useVisibility({ rate })
   useEffect(() => {
     if (visible && onVisible) { onVisible() }
   }, [ref, onVisible, visible])
