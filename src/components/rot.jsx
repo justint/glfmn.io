@@ -13,6 +13,7 @@ export default function Rot({ width, height, draw, interval }) {
     lineHeight: 1,
   }
   const tile = useRef()
+  const theme = useRef(colors(tile.current))
 
   const [display,] = useState(new Display({
     fontFamily: 'Source Code Pro',
@@ -22,11 +23,12 @@ export default function Rot({ width, height, draw, interval }) {
 
   useEffect(() => {
     display.setOptions(opts(tile, width, height))
+    theme.current = colors(tile.current)
     const canvas = display.getContainer()
     canvas.style.width = width + 'px'
     canvas.style.height = height + 'px'
-    if (draw) draw(display)
-  })
+    if (draw) draw(display, theme.current)
+  }, [draw, display, height, width])
 
   useEffect(
     () => {
@@ -42,7 +44,7 @@ export default function Rot({ width, height, draw, interval }) {
   useEffect(
     () => {
       if (draw && interval) {
-        const loop = setInterval(draw, interval, display)
+        const loop = setInterval(draw, interval, display, theme.current)
         return () => clearInterval(loop)
       }
     },
@@ -80,4 +82,21 @@ const opts = (tile, width, height) => {
     fg: '#928374', // dark gray
     bg: '#282828', // dark bg0
   }
+}
+
+const colors = node => {
+  if (!node) return {}
+  return ['fg', ...enumerate('fg'), 'bg', ...enumerate('bg'), 'gray']
+    .reduce((theme, color) => {
+      theme[color] = lookup(node, color)
+      return theme
+    }, {})
+}
+
+function enumerate(pre) {
+  return [0, 1, 2, 3, 4].map(n => `${pre}${n}`)
+}
+
+function lookup(node, color) {
+  return getComputedStyle(node).getPropertyValue(`--${color}`)
 }

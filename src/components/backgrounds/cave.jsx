@@ -6,7 +6,7 @@ export default function ({ width, height }) {
   return <Display width={width} height={height} draw={draw} />
 }
 
-function draw(display) {
+function draw(display, theme) {
   const { width, height } = display.getOptions()
   const map = new Map.Cellular(width, height, { connected: true })
 
@@ -17,8 +17,8 @@ function draw(display) {
   map.create()
   map.create((x, y, wall) => {
     if (wall)
-      display.draw(x, y, '─', '#3C3836')
+      display.draw(x, y, '─', theme.bg1)
     else
-      display.draw(x, y, '.', '#504945')
+      display.draw(x, y, '.', theme.bg2)
   })
 }
