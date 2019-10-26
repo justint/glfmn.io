@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `glfmn`,
-    description: `A tech blog written by Gwen Lofman`,
+    description: `Gwen Lofman's tech blog`,
     author: `@glfmn`,
   },
   plugins: [
@@ -14,7 +14,7 @@ module.exports = {
         path: `${__dirname}/content/posts`,
       }
     },
-    { 
+    {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [{
@@ -51,7 +51,7 @@ module.exports = {
     {
       resolve: `gatsby-transformer-yaml`,
       options: {
-        typeName: ({node}) => node.name,
+        typeName: ({ node }) => node.name,
       },
     },
     {
