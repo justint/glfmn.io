@@ -1,0 +1,20 @@
+{
+  "name": "glfmn-io",
+  "collaborators": [
+    "Gwen Lofman <Gwen@Lofman.io>"
+  ],
+  "description": "WASM components of glfmn.io",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/glfmn/glfmn.io"
+  },
+  "files": [
+    "glfmn_io_bg.wasm",
+    "glfmn_io.js",
+    "glfmn_io.d.ts"
+  ],
+  "module": "glfmn_io.js",
+  "types": "glfmn_io.d.ts",
+  "sideEffects": "false"
+}
