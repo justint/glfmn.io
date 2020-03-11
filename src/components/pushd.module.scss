@@ -20,6 +20,13 @@
             margin-left: 0;
         }
 
+        color: var(--bright-green);
+
+        &:hover {
+            color: var(--bg0);
+            background-color: var(--bright-green);
+        }
+
         &last-child {
             margin-right: 0;
         }

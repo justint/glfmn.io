@@ -13,7 +13,7 @@ html {
   font-size: 15px;
 
   @media (min-width: $large-size) {
-      & { font-size: 15.5px; }
+      & { font-size: 16.5px; }
   }
   @media (max-width: $mobile-size) {
       & { font-size: 16px; }

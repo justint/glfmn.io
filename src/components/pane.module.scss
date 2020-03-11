@@ -89,10 +89,8 @@ $text-element-color: var(--gray);
 
     p {
         margin: 0;
-
-        & + p {
-            text-indent: 1.15em;
-        }
+        margin-bottom: 1rem;
+        line-height: 1.5;
     }
 
     a {
@@ -172,7 +170,8 @@ $text-element-color: var(--gray);
     }
 
     pre {
-        font-size: 1em;
+        line-height: 1.0;
+        font-size: 0.85em;
         color: var(--fg);
         background-color: var(--bg0-s);
         padding: 1em 0;
@@ -286,7 +285,7 @@ $gutter-offset: 5em;
     padding-right: $column-size;
     @media screen and (min-width: $large-size) {
         margin: 0 auto;
-        max-width: 1000px;
+        max-width: 700px;
     }
 }
 
@@ -300,6 +299,7 @@ $gutter-offset: 5em;
 }
 
 .line-heading {
+    font-size: 1.1rem;
     padding-left: $column-size;
     padding-top: 1em;
     padding-bottom: 1em;
