@@ -6,7 +6,7 @@ import { PushDContext } from '../components/pushd'
 import SEO from '../components/seo'
 import Header from '../components/header'
 
-import style from './index.module.scss'
+import * as style from './index.module.scss'
 
 export default function IndexPage({ data }) {
   const { edges: posts } = data.allMarkdownRemark

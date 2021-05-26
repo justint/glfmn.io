@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useContext } from 'react'
-import style from './text-ui.module.scss'
+import * as style from './text-ui.module.scss'
 import { ResizeContext } from '../../resize'
 
 export function Progress({ label, progress, ...props }) {

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { PushD } from './pushd'
 
-import style from './footer.module.scss'
+import * as style from './footer.module.scss'
 
 export default function Footer({ className, children, ...props }) {
     return (

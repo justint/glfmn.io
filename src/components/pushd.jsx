@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import style from './pushd.module.scss'
+import * as style from './pushd.module.scss'
 import { Link } from 'gatsby'
 import classNames from 'classnames'
 

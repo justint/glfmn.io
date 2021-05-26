@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import useVisibility from '../visible'
 
 
-import style from './pane.module.scss'
+import * as style from './pane.module.scss'
 
 const Pane = React.forwardRef(({ className, foot, children, ...props }, ref) => (
   <article

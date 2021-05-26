@@ -7,7 +7,7 @@ import { PushD, PushDContext } from '../components/pushd'
 import { Progress } from '../components/text-ui/progress'
 import ResizeProvider from '../resize'
 
-import style from './post.module.scss'
+import * as style from './post.module.scss'
 
 export default function Template({ data }) {
   const { markdownRemark } = data

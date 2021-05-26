@@ -5,7 +5,7 @@ import Pane, { LinkBox } from './pane'
 import classNames from 'classnames'
 import Background from '../components/backgrounds'
 
-import style from './preview.module.scss'
+import * as style from './preview.module.scss'
 
 const Preview = ({ path, title, author, date, summary, children, ...props }) => (
     <LinkBox to={path} linkText={`open ${path}.md`} {...props}>

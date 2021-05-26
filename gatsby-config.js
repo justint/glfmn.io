@@ -20,21 +20,8 @@ module.exports = {
         plugins: [{
           resolve: `gatsby-remark-vscode`,
           options: {
-            colorTheme: 'Gruvbox Dark (Medium)',
-            extensions: [
-              {
-                identifier: 'tomphilbin.gruvbox-themes',
-                version: '1.0.0'
-              },
-              {
-                identifier: 'bmalehorn.vscode-fish',
-                version: '1.0.9'
-              },
-              {
-                identifier: 'ms-vscode.PowerShell',
-                version: '2019.9.0'
-              }
-            ]
+             theme: 'Gruvbox Dark Medium',
+             extensions: ['gruvbox']
           }
         }]
       }
@@ -75,11 +62,12 @@ module.exports = {
         background_color: `#fbf1c7`,
         theme_color: `#282828`,
         display: `minimal-ui`,
-        icon: `src/images/icon.png`, // This path is relative to the root of the site.
+        // This path is relative to the root of the site.
+        icon: `src/images/icon.png`,
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
+    // this (optional) plugin enables Progressive Web App + Offline
+    // functionality, to learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
 }
