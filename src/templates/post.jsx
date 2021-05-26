@@ -38,7 +38,6 @@ export default function Template({ data }) {
           }>
             {frontmatter.draft && <DraftNotice />}
             <article
-              className={style.postContent}
               dangerouslySetInnerHTML={{ __html: html }}
             />
             <Link onClick={onClick(path, '/')} tabIndex="0" className={style.goBack} to="/">
