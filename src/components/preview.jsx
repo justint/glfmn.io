@@ -8,7 +8,7 @@ import Background from '../components/backgrounds'
 import style from './preview.module.scss'
 
 const Preview = ({ path, title, author, date, summary, children, ...props }) => (
-    <LinkBox className={style.preview} to={path} linkText={`open ${path}.md`} {...props}>
+    <LinkBox to={path} linkText={`open ${path}.md`} {...props}>
         <Title author={author} date={date} excerpt={summary}>
             {title}
         </Title>
