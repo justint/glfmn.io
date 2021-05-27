@@ -2,7 +2,7 @@ import React from 'react'
 import { Display } from '../backgrounds'
 import { Map } from 'rot-js'
 
-export default function ({ width, height }) {
+export default function Cave({ width, height }) {
   return <Display width={width} height={height} draw={draw} />
 }
 
