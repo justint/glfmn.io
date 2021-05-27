@@ -48,7 +48,8 @@ export const ListPane = ({ bg, className, children, ...props }) => (
         <ul className={style.list}>
             {React.Children.map(
                 children,
-                ({ key, ...child }) => <li key={key} className={style.listItem}>{child}</li>
+                ({ key, ...child }) =>
+                  <li key={key} className={style.listItem}>{child}</li>
             )}
         </ul>
     </Pane>
@@ -62,4 +63,3 @@ export const Title = ({ excerpt, author, date, children }) => (
         {excerpt && <span className={style.excerpt}>{excerpt}</span>}
     </>
 )
-
