@@ -86,8 +86,11 @@ const opts = (tile, width, height) => {
 
 const colors = node => {
   if (!node) return {}
-  return ['fg', ...enumerate('fg'), 'bg', ...enumerate('bg'), 'gray']
-    .reduce((theme, color) => {
+  return [
+    'fg', ...enumerate('fg'),
+      'bg', ...enumerate('bg'),
+      'gray', 'purple', 'blue',
+    ].reduce((theme, color) => {
       theme[color] = lookup(node, color)
       return theme
     }, {})
