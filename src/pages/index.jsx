@@ -25,7 +25,7 @@ export default function IndexPage({ data }) {
     {}
   )
 
-  const [bg, setBg] = useState(null)
+  const [bg, setBg] = useState('cave-generator')
 
   return (<>
     <SEO title="Home" />
@@ -56,7 +56,7 @@ const SeriesLabel = ({ series, colors }) => (
 export const pageQuery = graphql`query IndexQuery {
   allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date] }) {
     edges {
-      node { 
+      node {
         id
         frontmatter {
           title
