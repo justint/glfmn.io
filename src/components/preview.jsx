@@ -1,5 +1,5 @@
-import React, { useRef } from 'react'
-import { Link } from 'gatsby'
+import React, { useEffect, useRef } from 'react'
+import { Link, useStaticQuery, graphql } from 'gatsby'
 import ResizeProvider from '../resize'
 import Pane, { LinkBox } from './pane'
 import classNames from 'classnames'
@@ -42,18 +42,54 @@ export const PostBg = ({ bg }) => {
     )
 }
 
-export const ListPane = ({ bg, className, children, ...props }) => (
-    <Pane className={className} {...props}>
-        {bg}
-        <ul className={style.list}>
-            {React.Children.map(
-                children,
-                ({ key, ...child }) =>
-                  <li key={key} className={style.listItem}>{child}</li>
-            )}
-        </ul>
-    </Pane>
-)
+export const ListPane = ({ bg, className, children, ...props }) => {
+    // get total posts
+    const { allMarkdownRemark: posts } = useStaticQuery(
+        graphql`
+            query {
+                allMarkdownRemark {
+                    totalCount
+                }
+            }
+        `
+    )
+
+    let currentLocation = 0 // assume to start from 0
+    const maxScroll = window.innerHeight * (posts.totalCount - 1)
+
+    useEffect(() => {
+        document.addEventListener('keydown', e => {
+            switch(e.key) {
+                case "j":
+                    // prevent current location to not hop beyond max height  
+                    if (currentLocation < maxScroll) {
+                        currentLocation += window.innerHeight
+                        window.scrollTo(0, currentLocation)
+                    }      
+                    break
+                case "k":
+                    if (currentLocation > 0) {
+                        currentLocation -= window.innerHeight
+                        window.scrollTo(0, currentLocation)
+                    }
+                    break
+            }
+        })
+    }, [])
+    
+    return (
+        <Pane className={className} {...props}>
+            {bg}
+            <ul className={style.list}>
+                {React.Children.map(
+                    children,
+                    ({ key, ...child }) =>
+                      <li key={key} className={style.listItem}>{child}</li>
+                )}
+            </ul>
+        </Pane>
+    )
+}
 
 export const Title = ({ excerpt, author, date, children }) => (
     <>
