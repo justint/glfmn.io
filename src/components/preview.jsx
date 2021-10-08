@@ -54,27 +54,32 @@ export const ListPane = ({ bg, className, children, ...props }) => {
         `
     )
 
-    let currentLocation = 0 // assume to start from 0
-    const maxScroll = window.innerHeight * (posts.totalCount - 1)
-
     useEffect(() => {
+        let currentLocation = 0
+        const maxScroll = window.innerHeight * (posts.totalCount - 1)
+       
+        let mounted = true
         document.addEventListener('keydown', e => {
-            switch(e.key) {
-                case "j":
-                    // prevent current location to not hop beyond max height  
-                    if (currentLocation < maxScroll) {
-                        currentLocation += window.innerHeight
-                        window.scrollTo(0, currentLocation)
-                    }      
-                    break
-                case "k":
-                    if (currentLocation > 0) {
-                        currentLocation -= window.innerHeight
-                        window.scrollTo(0, currentLocation)
-                    }
-                    break
+            if (mounted) {
+                switch(e.key) {
+                    case "j":
+                        // prevent current location to not hop beyond max height  
+                        if (currentLocation < maxScroll) {
+                            currentLocation += window.innerHeight
+                            window.scrollTo(0, currentLocation)
+                        }      
+                        break
+                    case "k":
+                        if (currentLocation > 0) {
+                            currentLocation -= window.innerHeight
+                            window.scrollTo(0, currentLocation)
+                        }
+                        break
+                }
             }
         })
+        
+        return () => mounted = false
     }, [])
     
     return (
