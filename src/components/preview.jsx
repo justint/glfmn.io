@@ -43,21 +43,11 @@ export const PostBg = ({ bg }) => {
 }
 
 export const ListPane = ({ bg, className, children, ...props }) => {
-    // get total posts
-    const { allMarkdownRemark: posts } = useStaticQuery(
-        graphql`
-            query {
-                allMarkdownRemark {
-                    totalCount
-                }
-            }
-        `
-    )
-
     useEffect(() => {
         let currentLocation = 0
-        const maxScroll = window.innerHeight * (posts.totalCount - 1)
-       
+        const boxes = document.querySelectorAll('div[class="box-wrapper"] > ul > li')
+        const maxScroll = window.innerHeight * (boxes.length - 1)
+
         let mounted = true
         document.addEventListener('keydown', e => {
             if (mounted) {
