@@ -13,7 +13,7 @@ const Pane = React.forwardRef(({ className, foot, children, ...props }, ref) => 
     {...props}
     className={classNames(style.paneContainer, className)}
   >
-    <div className="box-wrapper">{children}</div>
+    <div>{children}</div>
     <footer className={style.footer}>{foot}</footer>
   </article>
 ))

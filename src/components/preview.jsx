@@ -44,9 +44,8 @@ export const PostBg = ({ bg }) => {
 
 export const ListPane = ({ bg, className, children, ...props }) => {
     useEffect(() => {
-        let currentLocation = 0
-        const boxes = document.querySelectorAll('div[class="box-wrapper"] > ul > li')
-        const maxScroll = window.innerHeight * (boxes.length - 1)
+        let currentLocation = window.scrollY // dynamically get current location of client
+        const maxScroll = window.innerHeight * (React.Children.count(children) - 1)
 
         let mounted = true
         document.addEventListener('keydown', e => {
