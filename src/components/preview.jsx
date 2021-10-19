@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { Link, useStaticQuery, graphql } from 'gatsby'
+import { Link } from 'gatsby'
 import ResizeProvider from '../resize'
 import Pane, { LinkBox } from './pane'
 import classNames from 'classnames'
